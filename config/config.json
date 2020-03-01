@@ -1,0 +1,25 @@
+{
+    "development": {
+      "username": "root",
+      "password": "1234",
+      "database": "beeSimulator",
+      "host": "localhost",
+      "dialect": "mysql",
+      "timezone": "Africa/Cairo"
+    },
+    "test": {
+      "username": "root",
+      "password": null,
+      "database": "database_test",
+      "host": "127.0.0.1",
+      "dialect": "mysql"
+    },
+    "production": {
+      "username": "Smart",
+      "password": "1234",
+      "database": "call_center",
+      "host": "localhost",
+      "dialect": "mysql"
+    }
+  }
+  
