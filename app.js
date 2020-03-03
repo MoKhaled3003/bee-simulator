@@ -11,7 +11,7 @@ var {sequelize} = require('./controller/v0/indexModels');
 
 
 sequelize.sync({
-force : true
+// force : true
 });
 
 var app = express();

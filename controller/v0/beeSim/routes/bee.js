@@ -5,14 +5,23 @@ const beePayload = require("../../indexModels")["beePayload"];
 const fs = require('fs');
 var readline = require('readline');
 
-var he = require('he')
-var Parser = require("fast-xml-parser").j2xParser;
+var parser = require('fast-xml-parser');
 //default options need not to set
-var defaultOptions = {
-  cdataTagName: "__cdata",
-  cdataPositionChar: "\\c"
+var options = {
+  attributeNamePrefix : "@_",
+  attrNodeName: "attr", //default is 'false'
+  textNodeName : "#text",
+  ignoreAttributes : false,
+  ignoreNameSpace : false,
+  allowBooleanAttributes : true,
+  parseNodeValue : true,
+  parseAttributeValue : false,
+  trimValues: true,
+  cdataTagName: "__cdata", //default is 'false'
+  cdataPositionChar: "\\c",
+  parseTrueNumberOnly: false,
+  arrayMode: false
 };
-
 
 
 router.get('/inquiry', async (req, res) => {
@@ -21,27 +30,22 @@ router.get('/inquiry', async (req, res) => {
 
 
 router.post('/payment', async (req, res) => {
-  var arr = [];
   var myInterface = readline.createInterface({
-    input: fs.createReadStream('XMLreqjson.json')
+    input: fs.createReadStream('XMLrequest.txt')
   });
 
   myInterface.on('line', async function (line) {
-    var jsonObj = JSON.parse(line);
-    console.log(jsonObj)
-    if(!jsonObj.Request.data.requestMap.item.value)
-    {
-      jsonObj.Request.data.requestMap.item.value = null;
+    var jsonObj = parser.parse(line,options);
+    console.log(jsonObj.Request.data.serviceAccountId)
+ 
+    let beereq = await beePayload.findOne({ where :{account_id: jsonObj.Request.data.serviceAccountId}})
+    if(beereq){
+      beereq.request = line;
+      console.log(beereq)
+      await beereq.save({fields: ['request']});
     }
-    let beereq = new beePayload({
-      account_id: jsonObj.Request.data.serviceAccountId,
-      params: jsonObj.Request.data.requestMap.item.value,
-      amount: jsonObj.Request.data.totalAmount
-    })
-    arr.push(beereq)
-    await beereq.save();
   });
-  res.status(200).send(arr)
+  res.status(200).send()
 });
 
 router.get('/list', async (req, res) => {

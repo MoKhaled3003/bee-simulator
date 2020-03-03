@@ -4,8 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     account_id: DataTypes.INTEGER,
     params: DataTypes.STRING,
     amount: DataTypes.INTEGER,
-    request: DataTypes.TEXT,
-    response: DataTypes.TEXT,
+    request: DataTypes.BLOB,
+    response: DataTypes.BLOB,
     action: DataTypes.STRING,
     used:DataTypes.STRING
   }, {});
