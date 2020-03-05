@@ -9,7 +9,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       amount: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL(10, 2)
+      },
+      totalAmount: {
+        type: Sequelize.DECIMAL(10, 2)
       },
       request: {
         type: Sequelize.TEXT
