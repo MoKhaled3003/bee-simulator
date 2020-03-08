@@ -1,9 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const beePayload = require("../../indexModels")["beePayload"];
-const data = require('./../../../../test.json')
-const fs = require('fs');
-var readline = require('readline');
 var {
   sequelize
 } = require('./../../indexModels');
@@ -11,9 +8,11 @@ const { Op } = require("sequelize");
 
 
 var parser = require('fast-xml-parser');
+var Parser = require("fast-xml-parser").j2xParser;
+
 //default options need not to set
 var options = {
-  attributeNamePrefix: "@_",
+  attributeNamePrefix: "",
   attrNodeName: "attr", //default is 'false'
   textNodeName: "#text",
   ignoreAttributes: false,
@@ -37,23 +36,28 @@ router.get('/inquiry', async (req, res) => {
 router.post('/payment', async (req, res) => {
   if (!req.body.request.data.requestmap.item.value) {
     var beeres = await beePayload.findOne({ where :{
-      account_id: req.body.request.data.serviceaccountid,
-      totalAmount: req.body.request.data.totalamount,
-      amount:  req.body.request.data.amount
+      account_id: req.body.request.data.serviceaccountid
     }  
   })
   }else {
     var beeres = await beePayload.findOne({ where :{
       account_id: req.body.request.data.serviceaccountid,
-      params: req.body.request.data.requestmap.item.value,
-      totalAmount: req.body.request.data.totalamount,
-      amount:  req.body.request.data.amount
+      params: req.body.request.data.requestmap.item.value
     }  
   })
   }
     if(beeres && beeres.action == "RR"){
-      console.log(beeres.response)
-      res.status(200).contentType('application/XML').send(beeres.response);
+     var beeresjson = parser.parse((beeres.response).toString(),options);
+
+     console.log(beeresjson)
+     beeresjson.Response.data.transactionId = req.body.request.data.transactionid
+     console.log(beeresjson.Response.data.transactionId)
+
+     var xmlparser = new Parser(options);
+     var modifiedres = xmlparser.parse(beeresjson);
+      res.status(200).contentType('application/XML').send(modifiedres);
+    }else{
+      res.status(400).send('not valid xml data');
     }
 });
 
