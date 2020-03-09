@@ -34,7 +34,7 @@ router.get('/inquiry', async (req, res) => {
 
 
 router.post('/payment', async (req, res) => {
-  if (!req.body.request.data.requestmap.item.value) {
+  if (!req.body.request.data.requestmap) {
     var beeres = await beePayload.findOne({ where :{
       account_id: req.body.request.data.serviceaccountid
     }  
