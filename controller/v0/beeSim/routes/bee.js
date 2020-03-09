@@ -33,31 +33,42 @@ router.get('/inquiry', async (req, res) => {
 });
 
 router.post('/payment', async (req, res) => {
-  if (!Object.keys(req.body.request.data.requestmap)) {
+
+  if(req.body.request.data.serviceaccountid){
     var beeres = await beePayload.findOne({ where :{
       account_id: req.body.request.data.serviceaccountid
-    }  
-  })
-  }else {
-    var beeres = await beePayload.findOne({ where :{
-      account_id: req.body.request.data.serviceaccountid,
-      params: req.body.request.data.requestmap.item.value
-    }  
-  })
+    }})  
   }
-    if(beeres && beeres.action == "RR"){
-     var beeresjson = parser.parse((beeres.response).toString(),options);
+  console.log(beeres.params)
+  if (Object.keys(req.body.request.data.requestmap == false)) {
+    if(!beeres.params&& beeres.action == "RR"){
+      var beeresjson = parser.parse((beeres.response).toString(),options);
 
-     console.log(beeresjson)
-     beeresjson.Response.data.transactionId = req.body.request.data.transactionid
-     console.log(beeresjson.Response.data.transactionId)
+    console.log(beeresjson)
+    beeresjson.Response.data.transactionId = req.body.request.data.transactionid
+    console.log(beeresjson.Response.data.transactionId)
 
-     var xmlparser = new Parser(options);
-     var modifiedres = xmlparser.parse(beeresjson);
-      res.status(200).contentType('application/XML').send(modifiedres);
+    var xmlparser = new Parser(options);
+    var modifiedres = xmlparser.parse(beeresjson);
+     res.status(200).contentType('application/XML').send(modifiedres);
     }else{
-      res.status(400).send('not valid xml data');
+    res.status(400).contentType('application/XML').send('bad xml params ');
     }
+    }  
+  else if (req.body.request.data.requestmap.item.value == beeres.params  && beeres.action == "RR" ){
+    var beeresjson = parser.parse((beeres.response).toString(),options);
+
+    console.log(beeresjson)
+    beeresjson.Response.data.transactionId = req.body.request.data.transactionid
+    console.log(beeresjson.Response.data.transactionId)
+
+    var xmlparser = new Parser(options);
+    var modifiedres = xmlparser.parse(beeresjson);
+     res.status(200).contentType('application/XML').send(modifiedres);
+  }else{
+    res.status(400).contentType('application/XML').send('bad xml params ');
+
+  }
 });
 
 router.get('/list', async (req, res) => {
