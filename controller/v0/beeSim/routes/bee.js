@@ -32,9 +32,8 @@ router.get('/inquiry', async (req, res) => {
   
 });
 
-
 router.post('/payment', async (req, res) => {
-  if (!req.body.request.data.requestmap) {
+  if (!Object.keys(req.body.request.data.requestmap)) {
     var beeres = await beePayload.findOne({ where :{
       account_id: req.body.request.data.serviceaccountid
     }  
@@ -70,12 +69,5 @@ router.get('/status', async (req, res) => {
 
 
 });
-
-function validateXML(jsonreq) {
-  var parser = new Parser(defaultOptions);
-  var xml = parser.parse(jsonreq);
-  return xml;
-
-};
 
 module.exports = router;
