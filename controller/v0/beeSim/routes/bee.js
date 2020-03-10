@@ -33,14 +33,15 @@ router.get('/inquiry', async (req, res) => {
 });
 
 router.post('/payment', async (req, res) => {
-
+console.log(req.body)
   if(req.body.request.data.serviceaccountid){
     var beeres = await beePayload.findOne({ where :{
       account_id: req.body.request.data.serviceaccountid
     }})  
   }
   console.log(beeres.params)
-  if (Object.keys(req.body.request.data.requestmap == false)) {
+  if (Object.keys(req.body.request.data.requestmap) == false) {
+    console.log('no request map')
     if(!beeres.params&& beeres.action == "RR"){
       var beeresjson = parser.parse((beeres.response).toString(),options);
 
@@ -56,6 +57,7 @@ router.post('/payment', async (req, res) => {
     }
     }  
   else if (req.body.request.data.requestmap.item.value == beeres.params  && beeres.action == "RR" ){
+    console.log('with request map')
     var beeresjson = parser.parse((beeres.response).toString(),options);
 
     console.log(beeresjson)
