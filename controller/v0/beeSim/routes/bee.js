@@ -35,25 +35,30 @@ router.get('/inquiry', async (req, res) => {
 });
 
 router.post('/payment', async (req, res) => {
-  console.log(req.headers['content-type'])
-  console.log(util.inspect(req.body, false, null, true /* enable colors */))
-  console.log(req.headers['content-type'] ,">>>>>>>>", "application/xml",
-  "equality",req.headers['content-type'] =="application/xml;")
-      if(req.headers['content-type'] =="application/xml;" && req.body.request.data.serviceaccountid){
-      var beeres = await beePayload.findOne({ where :{
-        account_id: req.body.request.data.serviceaccountid
-      }})
-      var beeresjson = parser.parse((beeres.response).toString(),options);
+  try{
+    console.log(req.headers['content-type'])
+    console.log(util.inspect(req.body, false, null, true /* enable colors */))
+    console.log(req.headers['content-type'] ,">>>>>>>>", "application/xml",
+    "equality",req.headers['content-type'] =="application/xml;")
+        if(req.headers['content-type'] =="application/xml;" && req.body.request.data.serviceaccountid){
+        var beeres = await beePayload.findOne({ where :{
+          account_id: req.body.request.data.serviceaccountid
+        }})
+        var beeresjson = parser.parse((beeres.response).toString(),options);
+    
+      console.log(beeresjson)
+      beeresjson.Response.data.transactionId = req.body.request.data.transactionid
+      console.log(beeresjson.Response.data.transactionId)
   
-    console.log(beeresjson)
-    beeresjson.Response.data.transactionId = req.body.request.data.transactionid
-    console.log(beeresjson.Response.data.transactionId)
-
-    var xmlparser = new Parser(options);
-    var modifiedres = xmlparser.parse(beeresjson);
-     res.status(200).contentType('application/XML').send(modifiedres);
-  }else{
-    res.status(400).contentType('application/XML').send('bad xml content type or service id ');
+      var xmlparser = new Parser(options);
+      var modifiedres = xmlparser.parse(beeresjson);
+       res.status(200).contentType('application/XML').send(modifiedres);
+    }else{
+      res.status(400).contentType('application/XML').send('bad xml content type or service id ');
+    }
+    
+  }catch(e){
+    res.status(500).send('internal server error ');
   }
   
      
