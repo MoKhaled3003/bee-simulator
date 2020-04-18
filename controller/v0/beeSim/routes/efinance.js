@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const beePayload = require("../../indexModels")["beePayload"];
 var {
-  sequelize
+    sequelize
 } = require('./../../indexModels');
 const {
-  Op
+    Op
 } = require("sequelize");
 const util = require('util')
 
@@ -16,53 +16,108 @@ var Parser = require("fast-xml-parser").j2xParser;
 
 //default options need not to set
 var options = {
-  attributeNamePrefix: "",
-  attrNodeName: "attr", //default is 'false'
-  textNodeName: "#text",
-  ignoreAttributes: false,
-  ignoreNameSpace: false,
-  allowBooleanAttributes: true,
-  parseNodeValue: true,
-  parseAttributeValue: false,
-  trimValues: true,
-  cdataTagName: "__cdata", //default is 'false'
-  cdataPositionChar: "\\c",
-  parseTrueNumberOnly: true,
-  arrayMode: false
+    attributeNamePrefix: "",
+    attrNodeName: "attr", //default is 'false'
+    textNodeName: "#text",
+    ignoreAttributes: false,
+    ignoreNameSpace: false,
+    allowBooleanAttributes: true,
+    parseNodeValue: true,
+    parseAttributeValue: false,
+    trimValues: true,
+    cdataTagName: "__cdata", //default is 'false'
+    cdataPositionChar: "\\c",
+    parseTrueNumberOnly: true,
+    arrayMode: false
 };
 
-router.post('/payment', async (req, res) => {
- 
+router.get('/', async (req, res) => {
+    try {
+        console.log(req.body['env:envelope']['env:body'].hasOwnProperty('ins0:enquirebills'))
+        console.log(util.inspect(req.body, false, null, true /* enable colors */ ))
+        console.log(req.headers['content-type'], ">>>>>>>>", "application/xml", "equality", req.headers['content-type'] == "application/xml;")
+        if (req.body['env:envelope']['env:body'].hasOwnProperty('ins0:enquirebills')) {
+            var billerid = req.body['env:envelope']['env:body']['ins0:enquirebills'].request1.message.efbps.banksvcrq.billinqrq.accountid.billerid;
+            var envbody = req.body['env:envelope']['env:body']['ins0:enquirebills'].request1.message.efbps
+            console.log(billerid)
+            var efinanceRes = await beePayload.findOne({
+                where: {
+                    account_id: billerid
+                }
+            })
+            var efinanceResjson = parser.parse((efinanceRes.response).toString(), options);
+            console.log(util.inspect(efinanceResjson, false, null, true /* enable colors */ ))
+            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.RqUID = envbody.banksvcrq.rquid
+            console.log(efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.RqUID)
+            var xmlparser = new Parser(options);
+            var modifiedres = xmlparser.parse(efinanceResjson);
+            res.status(200).contentType('application/XML').send((modifiedres).toString());
+        } else if (req.body['env:envelope']['env:body'].hasOwnProperty('ins0:calculatecommission')) {
+            var reqid = req.body['env:envelope']['env:body']['ins0:calculatecommission'].request1.message.efbps.banksvcrq.rquid
+            var efinanceRes = await beePayload.findOne({
+                where: {
+                    account_id: 99022
+                }
+            })
+            var efinanceResjson = parser.parse((efinanceRes.response).toString(), options);
+            console.log(util.inspect(efinanceResjson, false, null, true /* enable colors */ ))
+            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:calculateCommissionResponse'].result.message.EFBPS.BankSvcRs.RqUID = reqid
+            console.log(efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:calculateCommissionResponse'].result.message.EFBPS.BankSvcRs.RqUID)
+            var xmlparser = new Parser(options);
+            var modifiedres = xmlparser.parse(efinanceResjson);
+            res.status(200).contentType('application/XML').send((modifiedres).toString());
+        } else if (req.body['env:envelope']['env:body'].hasOwnProperty('ins0:confirmpayments')) {
+            var reqid = req.body['env:envelope']['env:body']['ins0:confirmpayments'].request1.message.efbps.banksvcrq.rquid
+            var efinanceRes = await beePayload.findOne({
+                where: {
+                    account_id: 99023
+                }
+            })
+            var efinanceResjson = parser.parse((efinanceRes.response).toString(), options);
+            console.log(util.inspect(efinanceResjson, false, null, true /* enable colors */ ))
+            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:confirmPaymentsResponse'].result.message.EFBPS.BankSvcRs.RqUID = reqid
+            console.log(efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:confirmPaymentsResponse'].result.message.EFBPS.BankSvcRs.RqUID)
+            var xmlparser = new Parser(options);
+            var modifiedres = xmlparser.parse(efinanceResjson);
+            res.status(200).contentType('application/XML').send((modifiedres).toString());
+        }else{
+            res.status(400).send('bad xml');
+        }
+    } catch (e) {
+        res.status(500).send('internal server error ');
+    }
 });
 
 router.get('/inquire', async (req, res) => {
 
-  console.log(req.headers['content-type'])
-  console.log(util.inspect(req.body, false, null, true /* enable colors */ ))
-  console.log(req.headers['content-type'], ">>>>>>>>", "application/xml",
-    "equality", req.headers['content-type'] == "application/xml;")
-  // try {
-  //   if (req.headers['content-type'] == "application/xml;" && req.body.request.data.serviceaccountid) {
-  //     var beeres = await beePayload.findOne({
-  //       where: {
-  //         account_id: req.body.request.data.serviceaccountid
-  //       }
-  //     })
-  //     var beeresjson = parser.parse((beeres.response).toString(), options);
+    try {
+        console.log(req.headers['content-type'])
+        console.log(util.inspect(req.body, false, null, true /* enable colors */ ))
+        console.log(req.headers['content-type'], ">>>>>>>>", "application/xml", "equality", req.headers['content-type'] == "application/xml;")
+        if (req.headers['content-type'] == "application/xml;" && req.body['env:envelope']['env:body']['ins0:enquirebills'].request1.message.efbps.banksvcrq.billinqrq.accountid.billerid) {
+            var billerid = req.body['env:envelope']['env:body']['ins0:enquirebills'].request1.message.efbps.banksvcrq.billinqrq.accountid.billerid;
+            var envbody = req.body['env:envelope']['env:body']['ins0:enquirebills'].request1.message.efbps
+            console.log(billerid)
+            var efinanceRes = await beePayload.findOne({
+                where: {
+                    account_id: billerid
+                }
+            })
+            var efinanceResjson = parser.parse((efinanceRes.response).toString(), options);
+            console.log(util.inspect(efinanceResjson, false, null, true /* enable colors */ ))
+            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.RqUID = envbody.banksvcrq.rquid
+            console.log(efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.RqUID)
+            var xmlparser = new Parser(options);
+            var modifiedres = xmlparser.parse(efinanceResjson);
+            res.status(200).contentType('application/XML').send((modifiedres).toString());
+        } else {
+            res.status(400).contentType('application/XML').send('bad xml content type or service id ');
+        }
 
-  //     console.log(beeresjson)
-  //     beeresjson.Response.data.transactionId = req.body.request.data.transactionid
-  //     console.log(beeresjson.Response.data.transactionId)
+    } catch (e) {
+        res.status(500).send('internal server error ');
+    }
 
-  //     var xmlparser = new Parser(options);
-  //     var modifiedres = xmlparser.parse(beeresjson);
-  //     res.status(200).contentType('application/XML').send(modifiedres);
-  //   } else {
-  //     res.status(400).contentType('application/XML').send('bad xml content type or service id ');
-  //   }
-  // } catch (e) {
-  //   res.status(500).send('internal server erorr');
-  // }
 
 });
 

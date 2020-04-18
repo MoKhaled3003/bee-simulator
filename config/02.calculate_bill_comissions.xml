@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:ns2="urn:BillPaymentService/wsdl" 
+    xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" 
+    xmlns:ins0="urn:BillPaymentService/types">
+    <env:Body>
+        <ins0:calculateCommission>
+            <request1>
+                <message>                    <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                    <EFBPS>
+                        <SignonRq>
+                            <ClientDt>2020-04-16T12:47:31.035</ClientDt>
+                            <LanguagePref>ar-eg</LanguagePref>
+                            <SignonProfile>
+                                <Sender>0024</Sender>
+                                <Receiver>EPAY</Receiver>
+                                <MsgCode>RFINQRQ</MsgCode>
+                            </SignonProfile>
+                        </SignonRq>
+                        <BankSvcRq>
+                            <RqUID>Damen1624820200416124731</RqUID>
+                            <FeeInqRq>
+                                <EPayBillRecID>7a3dfc2d-275f-42cb-bde8-a374d193a9c0</EPayBillRecID>
+                                <PayAmt>
+                                    <Sequence>1</Sequence>
+                                    <Amt>338.0</Amt>
+                                    <CurCode>818</CurCode>
+                                </PayAmt>
+                            </FeeInqRq>
+                        </BankSvcRq>
+                    </EFBPS>
+                </message>
+                <senderID>0024</senderID>
+                <signature>GwEAFxvPZo4aRCd/S3ckLhG+xRfDvtqPCxG6g85QCNJCWfylHJtegdANV+E2 GFCkn06D+ftQQD1fl+Ofv57sWqYXMjQ/BouvhwqLoUiNRM2TzWH2urVrXEs5 uS01qxPboTiF/NYrq7XKmuavzX4JKSObhfAqM0QqQyEfvs90oWY3bO2/uIXs uqNSpMekPmBnyj76qMqvqLXjxz51vz4bEM7hHaFhDxzlJG+RqBqg+Cj57tcJ IshDuxUz3rn28D2+pSKkms15vnjnaa8k/AAiXOPgKsVBaS0HA2vWs5Z8NvID qYeKhJJFrgUuT96ByI4rfbDoTgl+239/2OGPjD3npA==
+                </signature>
+            </request1>
+        </ins0:calculateCommission>
+    </env:Body>
+</env:Envelope>
+
+--------------------------------------------------------------------------------------------------
+<?xml version="1.0"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <p375:calculateCommissionResponse xmlns:p375="urn:BillPaymentService/types">
+            <result>
+                <message>
+                    <EFBPS>
+                        <SignonRq>
+                            <ClientDt>2020-04-16T12:46:12.866</ClientDt>
+                            <LanguagePref>ar-eg</LanguagePref>
+                            <SignonProfile>
+                                <Sender>EPAY</Sender>
+                                <Receiver>0024</Receiver>
+                                <MsgCode>RFINQRS</MsgCode>
+                            </SignonProfile>
+                        </SignonRq>
+                        <BankSvcRs>
+                            <Status>
+                                <StatusCode>0</StatusCode>
+                                <ShortDesc>Request processed successfully</ShortDesc>
+                            </Status>
+                            <RqUID>Damen1624820200416124731</RqUID>
+                            <FeeInqRs>
+                                <EPayBillRecID>7a3dfc2d-275f-42cb-bde8-a374d193a9c0</EPayBillRecID>
+                                <FeesAmt>
+                                    <Amt>4.85</Amt>
+                                    <CurCode>818</CurCode>
+                                </FeesAmt>
+                            </FeeInqRs>
+                        </BankSvcRs>
+                    </EFBPS>
+                </message>
+                <receiverID>0024</receiverID>
+                <signature>MMKp0G5ygGzysZPUgF3+cQ0Xf+62k3ylDtMZgUHCHUAxbB+WWg7DbaMrqYWPnoSRVBGuhfAg5Ck2 f790RJN4USkILRWWvAQD/H5eELYHBNZ1XSSGMuJ6EiqwsOL6BHG1zluwIbuexrQcZAjSxg/k4XLL 59zKRJtQsGO2dnrdJco=</signature>
+            </result>
+        </p375:calculateCommissionResponse>
+    </soapenv:Body>
+</soapenv:Envelope>

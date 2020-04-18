@@ -1,0 +1,135 @@
+----------------------------- request -------------------------
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:ns2="urn:BillPaymentService/wsdl" 
+    xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" 
+    xmlns:ins0="urn:BillPaymentService/types">
+    <env:Body>
+        <ins0:enquireBills>
+            <request1>
+                <message>                    <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                    <EFBPS>
+                        <SignonRq>
+                            <ClientDt>2020-04-16T12:47:16.026</ClientDt>
+                            <LanguagePref>ar-eg</LanguagePref>
+                            <SignonProfile>
+                                <Sender>0024</Sender>
+                                <Receiver>EPAY</Receiver>
+                                <MsgCode>RBINQRQ</MsgCode>
+                            </SignonProfile>
+                        </SignonRq>
+                        <BankSvcRq>
+                            <RqUID>Damen1624820200416124716</RqUID>
+                            <BillInqRq>
+                                <BankId>1024</BankId>
+                                <AccessChannel>POS</AccessChannel>
+                                <AccountId>
+                                    <BillingAcct>01108810008120</BillingAcct>
+                                    <BillerId>99021</BillerId>
+                                </AccountId>
+                                <ServiceType>ECP</ServiceType>
+                            </BillInqRq>
+                        </BankSvcRq>
+                    </EFBPS>
+                </message>
+                <senderID>0024</senderID>
+                <signature>a2Pu6XgKNUGXf3pgNuDUDRL3mlAL2IWOOJyILePcEtmKOVB4saEV2Ccp07Rl qnWtq3kC1uOTSuFEaJHtZVPvolHtFOTydi39Xe7M0NzhpRb2tFDYGdHCz5G5 lVm6GkbKNaVS0kGNivaZ5BxxImDK83pdhlSbs1Z9g9392/n9ADSox/zLRKm5 7/D6rvp40wvcRn8D00ovqdaLsiOdnZZCanmYlIcS+Dc92zu96NQX23AvLMgL gOVL55amPyxg6XMzuwZ2rMZ7VJjK5tsVTMA/7JFMZ/nL5NA/F9eTpufLKKZ9 6Ih9zrKBYXM7pLy3gTZxIGZgHnGYkW1ptBfd9UGN7w==
+                </signature>
+            </request1>
+        </ins0:enquireBills>
+    </env:Body>
+</env:Envelope>
+
+------------------------- response -------------------------------
+<?xml version="1.0"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <p375:enquireBillsResponse xmlns:p375="urn:BillPaymentService/types">
+            <result>
+                <message>
+                    <EFBPS>
+                        <SignonRq>
+                            <ClientDt>2020-04-16T12:35:20.173</ClientDt>
+                            <LanguagePref>ar-eg</LanguagePref>
+                            <SignonProfile>
+                                <Sender>EPAY</Sender>
+                                <Receiver>0024</Receiver>
+                                <MsgCode>RBINQRS</MsgCode>
+                            </SignonProfile>
+                        </SignonRq>
+                        <BankSvcRs>
+                            <Status>
+                                <StatusCode>0</StatusCode>
+                                <ShortDesc>Success</ShortDesc>
+                            </Status>
+                            <RqUID>Damen1624820200416124716</RqUID>
+                            <BillInqRs>
+                                <RecCount>1</RecCount>
+                                <BillRec>
+                                    <BillUploadStatusCode>BillNew</BillUploadStatusCode>
+                                    <BillPresentmentStatusCode>BillUnpaid</BillPresentmentStatusCode>
+                                    <DisplayLabel>
+                                        <LanguagePref>en-gb</LanguagePref>
+                                        <Text>North Cairo Electricity</Text>
+                                    </DisplayLabel>
+                                    <DisplayLabel>
+                                        <LanguagePref>ar-eg</LanguagePref>
+                                        <Text>&#x643;&#x647;&#x631;&#x628;&#x627;&#x621; &#x634;&#x645;&#x627;&#x644; &#x627;&#x644;&#x642;&#x627;&#x647;&#x631;&#x629;</Text>
+                                    </DisplayLabel>
+                                    <Msg>
+                                        <LanguagePref>ar-eg</LanguagePref>
+                                        <Text>&#x634;&#x631;&#x64A;&#x641; &#x627;&#x644;&#x633;&#x64A;&#x62F; &#x645;&#x631;&#x633;&#x64A; - 9 &#x639;&#x644;&#x64A; &#x627;&#x645;&#x64A;&#x646;             0</Text>
+                                    </Msg>
+                                    <Msg>
+                                        <LanguagePref>en-gb</LanguagePref>
+                                        <Text>&#x634;&#x631;&#x64A;&#x641; &#x627;&#x644;&#x633;&#x64A;&#x62F; &#x645;&#x631;&#x633;&#x64A; - 9 &#x639;&#x644;&#x64A; &#x627;&#x645;&#x64A;&#x646;             0</Text>
+                                    </Msg>
+                                    <EPayBillRecID>7a3dfc2d-275f-42cb-bde8-a374d193a9c0</EPayBillRecID>
+                                    <BillInfo>
+                                        <BillCategory>BBP</BillCategory>
+                                        <ServiceType>ECP</ServiceType>
+                                        <BillNumber>8689922-20200416124751</BillNumber>
+                                        <AccountId>
+                                            <BillingAcct>01108810008120</BillingAcct>
+                                            <BillerId>99021</BillerId>
+                                        </AccountId>
+                                        <CurAmt>
+                                            <Sequence>1</Sequence>
+                                            <OriginalAmt>338</OriginalAmt>
+                                            <AmtDue>338</AmtDue>
+                                            <CurCode>818</CurCode>
+                                            <ExactPmt>true</ExactPmt>
+                                            <PymtMode>Range</PymtMode>
+                                            <RangeInfo>
+                                                <MinAmt>338</MinAmt>
+                                                <MaxAmt>338</MaxAmt>
+                                            </RangeInfo>
+                                            <ShortDesc>
+                                                <LanguagePref>en-gb</LanguagePref>
+                                                <Text>&#x634;&#x647;&#x631; 3/2020</Text>
+                                            </ShortDesc>
+                                            <ShortDesc>
+                                                <LanguagePref>ar-eg</LanguagePref>
+                                                <Text>&#x634;&#x647;&#x631; 3/2020</Text>
+                                            </ShortDesc>
+                                            <SettleAccCode>417</SettleAccCode>
+                                        </CurAmt>
+                                        <DueDt>2020-03-01T00:00:00</DueDt>
+                                        <BillRefInfo>2-01108810008120</BillRefInfo>
+                                    </BillInfo>
+                                </BillRec>
+                            </BillInqRs>
+                        </BankSvcRs>
+                    </EFBPS>
+                </message>
+                <receiverID>0024</receiverID>
+                <signature>anF/NORk4DxMM3WlxRPrgzAulYNZFIRaHsKThnyDOqxnIzX2Uhg2biIwYRrlkBjaGMkJnU0eVe0D ygZLJd5isLqd1mAF2iq+YqK3Svk5Xlddpcmqrd2l/ul3qZWbx8jFUZKzO5wRljlYoqaLt2rWGDZD okXwtxqYQZnbpuhEvs8=</signature>
+            </result>
+        </p375:enquireBillsResponse>
+    </soapenv:Body>
+</soapenv:Envelope>

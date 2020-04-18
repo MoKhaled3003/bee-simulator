@@ -1,0 +1,109 @@
+-------------------------request  -----------------------------
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:ns2="urn:BillPaymentService/wsdl" 
+    xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" 
+    xmlns:ins0="urn:BillPaymentService/types">
+    <env:Body>
+        <ins0:confirmPayments>
+            <request1>
+                <message>                    <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                    <EFBPS>
+                        <SignonRq>
+                            <ClientDt>2020-04-16T12:48:03.205</ClientDt>
+                            <LanguagePref>ar-eg</LanguagePref>
+                            <SignonProfile>
+                                <Sender>0024</Sender>
+                                <Receiver>EPAY</Receiver>
+                                <MsgCode>RPADVRQ</MsgCode>
+                            </SignonProfile>
+                        </SignonRq>
+                        <BankSvcRq>
+                            <RqUID>Damen1624820200416124803</RqUID>
+                            <PmtAdviceRq>
+                                <EPayBillRecID>7a3dfc2d-275f-42cb-bde8-a374d193a9c0</EPayBillRecID>
+                                <PmtRec>
+                                    <PmtTransId>
+                                        <PmtId>Damen1624820200416124803</PmtId>
+                                        <PmtIdType>BNKPTN</PmtIdType>
+                                    </PmtTransId>
+                                    <PmtInfo>
+                                        <PayAmt>
+                                            <Sequence>1</Sequence>
+                                            <Amt>338.0</Amt>
+                                            <CurCode>818</CurCode>
+                                        </PayAmt>
+                                        <FeesAmt>
+                                            <Amt>4.85</Amt>
+                                            <CurCode>818</CurCode>
+                                        </FeesAmt>
+                                        <PrcDt>2020-04-16T12:48:03.205</PrcDt>
+                                        <BillNumber>8689922-20200416124751</BillNumber>
+                                        <AccountId>
+                                            <BillingAcct>01108810008120</BillingAcct>
+                                            <BillerId>99021</BillerId>
+                                        </AccountId>
+                                        <BankId>1024</BankId>
+                                        <AccessChannel>POS</AccessChannel>
+                                        <PmtMethod>ACTDEB</PmtMethod>
+                                        <PmtRefInfo>2-01108810008120</PmtRefInfo>
+                                    </PmtInfo>
+                                </PmtRec>
+                            </PmtAdviceRq>
+                        </BankSvcRq>
+                    </EFBPS>
+                </message>
+                <senderID>0024</senderID>
+                <signature>b2wgoAg69D0IwkEz8PK8W9Yl2tplLkTRDDjbNdEsBrtrVPPyBrRf4mGRjuBU ZDGwS8inePTVdGvnz8hH1RGbLe6Ira3GwEAAUOMPh70qDrLwUZsUukhlIuoR VBHXp1E6poUHtcScXYFUqE98lFeR3OWwdFuAoJqcwt0nXGekPLSX0s1388TJ Ks61bY27/dCuW2pYvc1pIJHCG83xorFDZSLiq/HtcDAYgP+K3y8lU+UBE+Sj nSN1OBx6a0xpNZAIVpZFdGMnCvAMEvwO4DDPd9MS9cPjzrhlIFgjSVZEsy3X J9JvgYRCjWMSi1bO4KF2MrQhpy+6bI6pdASvaptsDA==
+                </signature>
+            </request1>
+        </ins0:confirmPayments>
+    </env:Body>
+</env:Envelope>
+
+
+-------------------------response -----------------------------
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <p375:confirmPaymentsResponse xmlns:p375="urn:BillPaymentService/types">
+            <result>
+                <message>
+                    <EFBPS>
+                        <SignonRq>
+                            <ClientDt>2020-04-16T12:48:38.813</ClientDt>
+                            <LanguagePref>ar-eg</LanguagePref>
+                            <SignonProfile>
+                                <Sender>EPAY</Sender>
+                                <Receiver>0024</Receiver>
+                                <MsgCode>RPADVRS</MsgCode>
+                            </SignonProfile>
+                        </SignonRq>
+                        <BankSvcRs>
+                            <Status>
+                                <StatusCode>0</StatusCode>
+                                <ShortDesc>Payment Advice Accepted</ShortDesc>
+                            </Status>
+                            <RqUID>Damen1624820200416124803</RqUID>
+                            <PmtAdviceRs>
+                                <PmtRecAdviceStatus>
+                                    <PmtTransId>
+                                        <PmtId>202099000698010158</PmtId>
+                                        <PmtIdType>EPTN</PmtIdType>
+                                    </PmtTransId>
+                                </PmtRecAdviceStatus>
+                            </PmtAdviceRs>
+                        </BankSvcRs>
+                    </EFBPS>
+                </message>
+                <receiverID>0024</receiverID>
+                <signature>P4Ofkd2wVC244hn2BTTzqBbzFhUX5bhsC3oxN7J2F8/2ae5+bqTRbrGMq34py6x52l59nJVO+Hmm mFzysrm8pHWGqdeEWNRiQyH5+3g2m62iOML9FfeGg5qj+hC5kYpQQFRYQ5S+sy3J+EY4gEIeaTWk 79mY+1sIfgmeJoXHyDc=</signature>
+            </result>
+        </p375:confirmPaymentsResponse>
+    </soapenv:Body>
+</soapenv:Envelope>

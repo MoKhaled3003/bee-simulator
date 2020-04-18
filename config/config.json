@@ -8,10 +8,10 @@
       "timezone": "Africa/Cairo"
     },
     "test": {
-      "username": "root",
+      "username": "Smart",
       "password": "1234",
       "database": "beeSimulator",
-      "host": "localhost",
+      "host": "10.22.1.33",
       "dialect": "mysql"
     },
     "production": {
