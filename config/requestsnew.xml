@@ -1,0 +1,133 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="urn:BillPaymentService/wsdl" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ins0="urn:BillPaymentService/types">
+<env:Body>
+<ins0:enquireBills>
+<request1>
+ <message>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;
+&lt;EFBPS&gt;
+   &lt;SignonRq&gt;
+           &lt;ClientDt&gt;2020-04-15T12:53:11.778&lt;/ClientDt&gt;
+           &lt;LanguagePref&gt;ar-eg&lt;/LanguagePref&gt;
+           &lt;SignonProfile&gt;
+                   &lt;Sender&gt;0023&lt;/Sender&gt;
+                   &lt;Receiver&gt;EPAY&lt;/Receiver&gt;
+                   &lt;MsgCode&gt;RBINQRQ&lt;/MsgCode&gt;
+           &lt;/SignonProfile&gt;
+   &lt;/SignonRq&gt;
+   &lt;BankSvcRq&gt;
+           &lt;RqUID&gt;I1586955191774&lt;/RqUID&gt;
+           &lt;BillInqRq&gt;
+                   &lt;BankId&gt;1023&lt;/BankId&gt;
+                   &lt;AccessChannel&gt;POS&lt;/AccessChannel&gt;
+                   &lt;AccountId&gt;
+                           &lt;BillingAcct&gt;63020601&lt;/BillingAcct&gt;
+                           &lt;BillerId&gt;99008&lt;/BillerId&gt;
+                   &lt;/AccountId&gt;
+                   &lt;ServiceType&gt;ECP&lt;/ServiceType&gt;
+           &lt;/BillInqRq&gt;
+   &lt;/BankSvcRq&gt;
+&lt;/EFBPS&gt;</message>
+ <senderID>0023</senderID>
+ <signature>l6MIM4M8vJ3I0tWb0HLC+vzWnnmcFb/M+T+I2E1tPNBAg4nu0ORLrHbXdree574amb2TnTrtWTQT28PcspuwQAj15KhxXuH9mGm96VK4GZ4wXqOarslcFBB72VzqyJBQRAJpsb8Bgg9IyZc/pGtPY+CG8ow4cXTk1Giy505ohQSl5ukkp7mloR1I1gOBGApMvO08AJF3YnNXybXr/osiRQq0VTI6jEE0ajZ3Kezv7Ws9WtU8HGwVKNLvKVoXgvISAnGceCRe8kmsx11+AlpcXiRu8R4qeU5ydAXseaJN+ftfhAW2GXXNhhXCak1GAOtLXbxfz+SRK/5kw1tejUuPfQ==</signature>
+</request1>
+</ins0:enquireBills>
+</env:Body>
+</env:Envelope>
+
+
+
+
+
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="urn:BillPaymentService/wsdl" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ins0="urn:BillPaymentService/types">
+<env:Body>
+<ins0:calculateCommission>
+<request1>
+ <message>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;
+&lt;EFBPS&gt;
+   &lt;SignonRq&gt;
+   &lt;ClientDt&gt;2020-04-15T12:53:41.542&lt;/ClientDt&gt;
+   &lt;LanguagePref&gt;ar-eg&lt;/LanguagePref&gt;
+   &lt;SignonProfile&gt;
+           &lt;Sender&gt;0023&lt;/Sender&gt;
+           &lt;Receiver&gt;EPAY&lt;/Receiver&gt;
+           &lt;MsgCode&gt;RFINQRQ&lt;/MsgCode&gt;
+   &lt;/SignonProfile&gt;
+   &lt;/SignonRq&gt;
+   &lt;BankSvcRq&gt;
+   &lt;RqUID&gt;F1586955219452&lt;/RqUID&gt;
+   &lt;FeeInqRq&gt;
+   &lt;EPayBillRecID&gt;0abeb333-6862-41dc-8364-fca2315a9a30&lt;/EPayBillRecID&gt;
+   &lt;PayAmt&gt;
+   &lt;Sequence&gt;1&lt;/Sequence&gt;
+   &lt;Amt&gt;125&lt;/Amt&gt;
+   &lt;CurCode&gt;818&lt;/CurCode&gt;&lt;/PayAmt&gt;
+&lt;/FeeInqRq&gt;&lt;/BankSvcRq&gt;&lt;/EFBPS&gt;</message>
+ <senderID>0023</senderID>
+ <signature>ZcXKjM0xbKUf+XElNyn9to0sF3xAFwpJ8Yl0ivMEam3Di+qvAsKfNaT+yfmBh0BjKl7Jnf2pRJ0eeeaUYrOJjhtmm7Mmvi4e85yorUUHpU9YcNjRLbxIj2EGWK+4pIXkCiglN6bNg1EQqyZqVhzvL4iSpUdjZP2KHQ2pRnKaSd9Horr7SAhH0o9f1UxPkLlCdviR3cNMnwyWnABca3d412YzS+tN9zfoNjDcQ5A6KvGfQeueFTaTzb9mMhlVclVIkrJTfxff6e2lunitPRxyOEkGQ2c8rt3cwn33pvRaY91J7TwIOVNybOuB9BIJ3HsP+LDkQn/fPcrkrJNqurb0uA==</signature>
+</request1>
+</ins0:calculateCommission>
+</env:Body>
+</env:Envelope>
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="urn:BillPaymentService/wsdl" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ins0="urn:BillPaymentService/types">
+<env:Body>
+<ins0:confirmPayments>
+<request1>
+ <message>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;
+    &lt;EFBPS&gt;
+  &lt;SignonRq&gt;
+&lt;ClientDt&gt;2020-04-15T15:40:08.238&lt;/ClientDt&gt;
+&lt;LanguagePref&gt;ar-eg&lt;/LanguagePref&gt;
+   &lt;SignonProfile&gt;
+   &lt;Sender&gt;0023&lt;/Sender&gt;
+   &lt;Receiver&gt;EPAY&lt;/Receiver&gt;
+&lt;MsgCode&gt;RPADVRQ&lt;/MsgCode&gt;
+&lt;/SignonProfile&gt;
+&lt;/SignonRq&gt;
+&lt;BankSvcRq&gt;
+&lt;RqUID&gt;99000320200415011&lt;/RqUID&gt;
+&lt;PmtAdviceRq&gt;
+&lt;EPayBillRecID&gt;40ee649a-fba7-40ac-9574-9edcf4f41a8f&lt;/EPayBillRecID&gt;
+&lt;PmtRec&gt;
+&lt;PmtTransId&gt;
+  &lt;PmtId&gt;P99000320200415011&lt;/PmtId&gt;
+  &lt;PmtIdType&gt;BNKPTN&lt;/PmtIdType&gt;
+&lt;/PmtTransId&gt;
+&lt;PmtInfo&gt;
+  &lt;PayAmt&gt;
+     &lt;Sequence&gt;1&lt;/Sequence&gt;
+     &lt;Amt&gt;125.0&lt;/Amt&gt;
+     &lt;CurCode&gt;818&lt;/CurCode&gt;
+  &lt;/PayAmt&gt;
+  &lt;FeesAmt&gt;
+     &lt;Amt&gt;3.28&lt;/Amt&gt;
+     &lt;CurCode&gt;818&lt;/CurCode&gt;
+  &lt;/FeesAmt&gt;
+  &lt;PrcDt&gt;2020-04-15T15:40:08.238&lt;/PrcDt&gt;
+  &lt;BillNumber&gt;63020601-20200415053530&lt;/BillNumber&gt;
+  &lt;AccountId&gt;
+                           &lt;BillingAcct&gt;63020601&lt;/BillingAcct&gt;
+                           &lt;BillerId&gt;99008&lt;/BillerId&gt;
+  &lt;/AccountId&gt;
+  &lt;BankId&gt;1023&lt;/BankId&gt;
+  &lt;AccessChannel&gt;POS&lt;/AccessChannel&gt;
+  &lt;PmtMethod&gt;ACTDEB&lt;/PmtMethod&gt;
+  &lt;PmtRefInfo&gt;29|30|&lt;/PmtRefInfo&gt;
+&lt;/PmtInfo&gt;
+&lt;/PmtRec&gt;
+&lt;/PmtAdviceRq&gt;
+&lt;/BankSvcRq&gt;
+&lt;/EFBPS&gt;</message>
+ <senderID>0023</senderID>
+ <signature>tbCSmvR+cs7JI2YmDR59f0l9IhCuNPqywVHGQ20vHSP/ilX9YrKdZSpbuf+aIXB5jWdUCkRSSgWanGTnRp2cnqScWXHsPNvvUb597uDqiekM3PTPujwOETASCsdP//1MeXkXMxLojVXuOJ6TDhlKLaJjCNOuIy3daCL30dIZSsTD81WKrusUiSSXN43FGqEF1i9SAEmZtfh9xbu7L7TSLOvrsmmU1ChxYZX0BOXZDRGe4F0bLCFbVgzI2MiA2g7yMUg6mgzdqzK1XZVYuPuIGD0r63Kx8PnHiSP05OZswdD3j3POLF3uTfepLiOih3ZdYQnnTPgyEdgR/fz+QlnDBg==</signature>
+</request1>
+</ins0:confirmPayments>
+</env:Body>
+</env:Envelope>

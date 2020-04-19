@@ -31,7 +31,7 @@ var options = {
     arrayMode: false
 };
 
-router.get('/', async (req, res) => {
+router.get('/bills', async (req, res) => {
     try {
         console.log(req.body['env:envelope']['env:body'].hasOwnProperty('ins0:enquirebills'))
         console.log(util.inspect(req.body, false, null, true /* enable colors */ ))
@@ -88,13 +88,13 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/inquire', async (req, res) => {
+router.get('/cards', async (req, res) => {
 
     try {
-        console.log(req.headers['content-type'])
+        console.log(req.body['env:envelope']['env:body'].hasOwnProperty('ins0:enquirebills'))
         console.log(util.inspect(req.body, false, null, true /* enable colors */ ))
         console.log(req.headers['content-type'], ">>>>>>>>", "application/xml", "equality", req.headers['content-type'] == "application/xml;")
-        if (req.headers['content-type'] == "application/xml;" && req.body['env:envelope']['env:body']['ins0:enquirebills'].request1.message.efbps.banksvcrq.billinqrq.accountid.billerid) {
+        if (req.body['env:envelope']['env:body'].hasOwnProperty('ins0:enquirebills')) {
             var billerid = req.body['env:envelope']['env:body']['ins0:enquirebills'].request1.message.efbps.banksvcrq.billinqrq.accountid.billerid;
             var envbody = req.body['env:envelope']['env:body']['ins0:enquirebills'].request1.message.efbps
             console.log(billerid)
@@ -110,10 +110,37 @@ router.get('/inquire', async (req, res) => {
             var xmlparser = new Parser(options);
             var modifiedres = xmlparser.parse(efinanceResjson);
             res.status(200).contentType('application/XML').send((modifiedres).toString());
-        } else {
-            res.status(400).contentType('application/XML').send('bad xml content type or service id ');
+        } else if (req.body['env:envelope']['env:body'].hasOwnProperty('ins0:calculatecommission')) {
+            var reqid = req.body['env:envelope']['env:body']['ins0:calculatecommission'].request1.message.efbps.banksvcrq.rquid
+            var efinanceRes = await beePayload.findOne({
+                where: {
+                    account_id: 99957
+                }
+            })
+            var efinanceResjson = parser.parse((efinanceRes.response).toString(), options);
+            console.log(util.inspect(efinanceResjson, false, null, true /* enable colors */ ))
+            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:calculateCommissionResponse'].result.message.EFBPS.BankSvcRs.RqUID = reqid
+            console.log(efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:calculateCommissionResponse'].result.message.EFBPS.BankSvcRs.RqUID)
+            var xmlparser = new Parser(options);
+            var modifiedres = xmlparser.parse(efinanceResjson);
+            res.status(200).contentType('application/XML').send((modifiedres).toString());
+        } else if (req.body['env:envelope']['env:body'].hasOwnProperty('ins0:confirmpayments')) {
+            var reqid = req.body['env:envelope']['env:body']['ins0:confirmpayments'].request1.message.efbps.banksvcrq.rquid
+            var efinanceRes = await beePayload.findOne({
+                where: {
+                    account_id: 99958
+                }
+            })
+            var efinanceResjson = parser.parse((efinanceRes.response).toString(), options);
+            console.log(util.inspect(efinanceResjson, false, null, true /* enable colors */ ))
+            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:confirmPaymentsResponse'].result.message.EFBPS.BankSvcRs.RqUID = reqid
+            console.log(efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:confirmPaymentsResponse'].result.message.EFBPS.BankSvcRs.RqUID)
+            var xmlparser = new Parser(options);
+            var modifiedres = xmlparser.parse(efinanceResjson);
+            res.status(200).contentType('application/XML').send((modifiedres).toString());
+        }else{
+            res.status(400).send('bad xml');
         }
-
     } catch (e) {
         res.status(500).send('internal server error ');
     }

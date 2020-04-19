@@ -1,0 +1,140 @@
+----------------------- request ----------------------
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:ns2="urn:BillPaymentService/wsdl" 
+    xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" 
+    xmlns:ins0="urn:BillPaymentService/types">
+    <env:Body>
+        <ins0:enquireBills>
+            <request1>
+                <message>                    <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                    <EFBPS>
+                        <SignonRq>
+                            <ClientDt>2020-04-16T13:46:11.022</ClientDt>
+                            <LanguagePref>ar-eg</LanguagePref>
+                            <SignonProfile>
+                                <Sender>0024</Sender>
+                                <Receiver>EPAY</Receiver>
+                                <MsgCode>RBINQRQ</MsgCode>
+                            </SignonProfile>
+                        </SignonRq>
+                        <BankSvcRq>
+                            <RqUID>Damen2048720200416134611</RqUID>
+                            <BillInqRq>
+                                <BankId>1024</BankId>
+                                <AccessChannel>POS</AccessChannel>
+                                <AccountId>
+                                    <BillingAcct>IS-1144000006080000000092980</BillingAcct>
+                                    <BillerId>99956</BillerId>
+                                </AccountId>
+                                <ServiceType>pre</ServiceType>
+                                <AdditionInfo>
+                                    <Values>
+                                        <Key>CARD_DATA</Key>
+                                        <Value>31NjQs/////wgA//8F1srsIe/U/gEAAAD/////////EUQAAAYIAAAAAJKYASAAAAAAAAARAAD//////////yAYAQUAFnw1ODUsaAWnABFEAAAGCAAAAACghgEAOAABhIsC/wAAAP//LDAAEAaIEwAAECcAACBOAAC4iAAA6P0AAKCGAQAHAQAsAQAAcBcAAJABAADoAwAA9AEAADhKAAA0AwAAiBMAAOgDAACgDwAAeAUAABAnAACqBQAAoOUGABAnAAAAFwAJEwcBJQEgBCUEAQUkBSUFJgUnBTAGIwcwBzEHAQgCCAMIIAgGECkQAgEAAEAf3xgW//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////9oBUIAGQAAAAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkF8BAASHAQDoAwAAAAAAADD/AAAAAAQWfDAsfDgxNSxohQ0D3g0AAHQCAABCNkEAt1sLAAAAAACSmAEgAAAAAAAA/184AAEAWQcCBRgVBCApAwkAAAAA1jUAAMd1AAADAAAAAAAAAAAAAAAAAAABhIsCt1sLAEI2QQC7AZ1PAAAbAUIEAACCMgAAY/v///ZV////AAAABPQBAABYAgAAvAIAACADAAAGiBMAABAnAAAgTgAAuIgAAOj9AACghgEABwEALAEAAHAXAACQAQAA6AMAAPQBAAA4SgAANAMAAIgTAADoAwAAoA8AAHgFAAAQJwAAqgUAAKDlBgAAAAAAAAAQJwAAAAAAAAAAAAD//wOiACkDFAQgoQBBAhQEIKAAVyMTBCAAAzgABaCGAQAYIiEDIDcABRhzAQAkBBYDIDYABW6vAABVBRIDIAICAEMQIwQYAQAQGRQSFwAMFQQgBMd1AACkCAMA4SULAAMAbAAAxLsCABqwCgACp3kAAKwoAwAaRAoAAf6DAAAofwMAc8oJABLKeQAA4CsDAHVGCQARNYIAACRvAwCrzAgAEFB8AAAYPwMAdkoIAAnReAAAeCUDACbOBwAI6nQAADTiAgBVVQcAB+R1AACobgIAa+AGAAZzdAAAuGMCAIdqBgAFOW8AAHA9AgAU9gUAAAEBAFkHAgUYAAICAEEEEBIYQQQQEhgBADgEEBIYOAQQEhgAAxIAAQAAADQDIhIYEQABAAAAJwITERgQAAEAAAAAEyMQGAACEhCVJ4RHAAYEIBAXQCkBAwgCBRgADCADFyNTA2UBIAMXI1MgJT4AACACFAQSBHYBIAIUBBIAsUIAACABKBQJBHwBIAEoFAkQkkIAABkSIREWAYgBGRIhERYQ30YAABkREAFQAUwBGREZBkQAzDkAABkQGCFYAUwBGRAYIVggCDkAABkJBQRUBDYBGQkFBEQAAzgAABkICAdDBxMBGQgIB0MALDEAABkHKANXAwYBGQcoA1cAjS4AABkGBCNDA04BGQYEI0MgSDgAABkFKRZGBmgBGQUpFkUQDkAAABkEKRlFCVMBGQQCIzUguDkAAHV2FmiFFAAoAAAAkF8BAASHAQDoAwAAAAAAACgDFnwxNiwBEBIB//////+ZBgABAu4A</Value>
+                                    </Values>
+                                </AdditionInfo>
+                            </BillInqRq>
+                        </BankSvcRq>
+                    </EFBPS>
+                </message>
+                <senderID>0024</senderID>
+                <signature>Le+tmaMcp9Bg5LoIVXPIMd6UyCh7MfI+shWabF+qCgVJw9ABIZ81j/nM+EJN wGpb/FhedUdNUfrsvkSboIiUhuR70jiqvbZ8z9mzsiU/IInC06Ta+7AmwtPi J1YPkppqtMs6SmzWJz2DbI70TlIoMNTOEDVOJbRcVL0QZZLL6o3AwQqJejJl nTHNBdWRhp/nrkIgGShmMN1O6JUw0LDG07U+QYhJ/t+rDIvi2OPjd8xk53/k OnwnoWNYWuGGelBYao/L2ucZeA0cb3JptwceLA8l5pdHB9DLUh7DRcR32ia6 85tJepTP5o9Ibs0K4h1YRcdVGsZDVy1wkA02qnC9MA==
+                </signature>
+            </request1>
+        </ins0:enquireBills>
+    </env:Body>
+</env:Envelope>
+---------------------------- response --------------------------
+<?xml version="1.0"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <p375:enquireBillsResponse xmlns:p375="urn:BillPaymentService/types">
+            <result>
+                <message>
+                    <EFBPS>
+                        <SignonRq>
+                            <ClientDt>2020-04-16T13:34:16.143</ClientDt>
+                            <LanguagePref>ar-eg</LanguagePref>
+                            <SignonProfile>
+                                <Sender>EPAY</Sender>
+                                <Receiver>0024</Receiver>
+                                <MsgCode>RBINQRS</MsgCode>
+                            </SignonProfile>
+                        </SignonRq>
+                        <BankSvcRs>
+                            <Status>
+                                <StatusCode>0</StatusCode>
+                                <ShortDesc>Success</ShortDesc>
+                            </Status>
+                            <RqUID>Damen2048720200416134611</RqUID>
+                            <BillInqRs>
+                                <RecCount>1</RecCount>
+                                <BillRec>
+                                    <BillUploadStatusCode>BillNew</BillUploadStatusCode>
+                                    <BillPresentmentStatusCode>BillUnpaid</BillPresentmentStatusCode>
+                                    <DisplayLabel>
+                                        <LanguagePref>en-gb</LanguagePref>
+                                        <Text>Iskra</Text>
+                                    </DisplayLabel>
+                                    <DisplayLabel>
+                                        <LanguagePref>ar-eg</LanguagePref>
+                                        <Text>Iskra</Text>
+                                    </DisplayLabel>
+                                    <Msg>
+                                        <LanguagePref>ar-eg</LanguagePref>
+                                        <Text>Customer Code : 4411 | Customer Name : 806340751066301 | MinAmount : 10.09 | TotalDeducts : 0.00</Text>
+                                    </Msg>
+                                    <Msg>
+                                        <LanguagePref>en-gb</LanguagePref>
+                                        <Text>Customer Code : 4411 | Customer Name : 806340751066301 | MinAmount : 10.09 | TotalDeducts : 0.00</Text>
+                                    </Msg>
+                                    <EPayBillRecID>a9ecf16c-11df-4fc5-916b-914cb65c8af5</EPayBillRecID>
+                                    <BillInfo>
+                                        <BillCategory>BBP</BillCategory>
+                                        <ServiceType>pre</ServiceType>
+                                        <BillNumber>498175</BillNumber>
+                                        <AccountId>
+                                            <BillingAcct>IS-1144000006080000000092980</BillingAcct>
+                                            <BillerId>99956</BillerId>
+                                        </AccountId>
+                                        <CurAmt>
+                                            <Sequence>1</Sequence>
+                                            <OriginalAmt>10.09</OriginalAmt>
+                                            <AmtDue>10.09</AmtDue>
+                                            <CurCode>818</CurCode>
+                                            <ExactPmt>true</ExactPmt>
+                                            <PymtMode>Range</PymtMode>
+                                            <RangeInfo>
+                                                <MinAmt>10.09</MinAmt>
+                                                <MaxAmt>10000</MaxAmt>
+                                            </RangeInfo>
+                                            <ShortDesc>
+                                                <LanguagePref>en-gb</LanguagePref>
+                                                <Text>Enter Amount</Text>
+                                            </ShortDesc>
+                                            <ShortDesc>
+                                                <LanguagePref>ar-eg</LanguagePref>
+                                                <Text>&#x627;&#x62F;&#x62E;&#x644; &#x627;&#x644;&#x645;&#x628;&#x644;&#x63A;</Text>
+                                            </ShortDesc>
+                                            <SettleAccCode>562</SettleAccCode>
+                                        </CurAmt>
+                                        <DueDt>2020-04-16T00:00:00</DueDt>
+                                        <BillRefInfo>1144000006080000000092980-498175</BillRefInfo>
+                                    </BillInfo>
+                                </BillRec>
+                            </BillInqRs>
+                        </BankSvcRs>
+                    </EFBPS>
+                </message>
+                <receiverID>0024</receiverID>
+                <signature>Q2Oi0LpsDOfIqquqWdBYrIziZPwp2dv011QL77NHlbKbYF1LYcSS+D+oANgajcq1f/SkIHuRTnVa GZnFDuEFyaXycDASGgTMJToHjemOoiwRLzRYGGxj7ehoHZA/Rzi0fD/E1lcWe3ISPQ2G4Nu9KbbZ +CayJ3RL0/4Zc7Af15g=</signature>
+            </result>
+        </p375:enquireBillsResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
