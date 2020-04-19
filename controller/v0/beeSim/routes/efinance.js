@@ -83,7 +83,7 @@ router.get('/bills', async (req, res) => {
             var efinanceResjson = parser.parse((efinanceRes.response).toString(), options);
             console.log(util.inspect(efinanceResjson, false, null, true /* enable colors */ ))
             efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:confirmPaymentsResponse'].result.message.EFBPS.BankSvcRs.RqUID = reqid
-            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:confirmPaymentsResponse'].result.message.EFBPS.BankSvcRs.PmtAdviceRs.PmtRecAdviceStatus.PmtTransId.PmtId = Date.now()
+            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:confirmPaymentsResponse'].result.message.EFBPS.BankSvcRs.PmtAdviceRs.PmtRecAdviceStatus.PmtTransId.PmtId = Date.getFullYear()+'1'+Date.now()
 
             console.log(efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:confirmPaymentsResponse'].result.message.EFBPS.BankSvcRs.RqUID)
             var xmlparser = new Parser(options);
