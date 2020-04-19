@@ -48,12 +48,17 @@ router.get('/bills', async (req, res) => {
             var efinanceResjson = parser.parse((efinanceRes.response).toString(), options);
             console.log(util.inspect(efinanceResjson, false, null, true /* enable colors */ ))
             efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.RqUID = envbody.banksvcrq.rquid
+            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.BillInqRs.BillRec.BillInfo.AccountId.BillingAcct = envbody.banksvcrq.billinqrq.accountid.billingacct
+            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.BillInqRs.BillRec.BillInfo.AccountId.BillerId = envbody.banksvcrq.billinqrq.accountid.billerid
+            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.BillInqRs.BillRec.BillInfo.ServiceType = envbody.banksvcrq.billinqrq.ServiceType
+
             console.log(efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.RqUID)
             var xmlparser = new Parser(options);
             var modifiedres = xmlparser.parse(efinanceResjson);
             res.status(200).contentType('application/XML').send((modifiedres).toString());
         } else if (req.body['env:envelope']['env:body'].hasOwnProperty('ins0:calculatecommission')) {
             var reqid = req.body['env:envelope']['env:body']['ins0:calculatecommission'].request1.message.efbps.banksvcrq.rquid
+            var envbody = req.body['env:envelope']['env:body']['ins0:calculatecommission'].request1.message.efbps
             var efinanceRes = await beePayload.findOne({
                 where: {
                     account_id: 99022
@@ -62,6 +67,8 @@ router.get('/bills', async (req, res) => {
             var efinanceResjson = parser.parse((efinanceRes.response).toString(), options);
             console.log(util.inspect(efinanceResjson, false, null, true /* enable colors */ ))
             efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:calculateCommissionResponse'].result.message.EFBPS.BankSvcRs.RqUID = reqid
+            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:calculateCommissionResponse'].result.message.EFBPS.BankSvcRs.FeeInqRs.EPayBillRecID = envbody.banksvcrq.feeinqrq.epaybillrecid
+
             console.log(efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:calculateCommissionResponse'].result.message.EFBPS.BankSvcRs.RqUID)
             var xmlparser = new Parser(options);
             var modifiedres = xmlparser.parse(efinanceResjson);
@@ -76,6 +83,8 @@ router.get('/bills', async (req, res) => {
             var efinanceResjson = parser.parse((efinanceRes.response).toString(), options);
             console.log(util.inspect(efinanceResjson, false, null, true /* enable colors */ ))
             efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:confirmPaymentsResponse'].result.message.EFBPS.BankSvcRs.RqUID = reqid
+            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:confirmPaymentsResponse'].result.message.EFBPS.BankSvcRs.PmtAdviceRs.PmtRecAdviceStatus.PmtTransId.PmtId = Date.now()
+
             console.log(efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:confirmPaymentsResponse'].result.message.EFBPS.BankSvcRs.RqUID)
             var xmlparser = new Parser(options);
             var modifiedres = xmlparser.parse(efinanceResjson);
@@ -106,6 +115,9 @@ router.get('/cards', async (req, res) => {
             var efinanceResjson = parser.parse((efinanceRes.response).toString(), options);
             console.log(util.inspect(efinanceResjson, false, null, true /* enable colors */ ))
             efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.RqUID = envbody.banksvcrq.rquid
+            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.BillInqRs.BillRec.BillInfo.AccountId.BillingAcct = envbody.banksvcrq.billinqrq.accountid.billingacct
+            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.BillInqRs.BillRec.BillInfo.AccountId.BillerId = envbody.banksvcrq.billinqrq.accountid.billerid
+            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.BillInqRs.BillRec.BillInfo.ServiceType = envbody.banksvcrq.billinqrq.ServiceType
             console.log(efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.RqUID)
             var xmlparser = new Parser(options);
             var modifiedres = xmlparser.parse(efinanceResjson);
@@ -120,6 +132,7 @@ router.get('/cards', async (req, res) => {
             var efinanceResjson = parser.parse((efinanceRes.response).toString(), options);
             console.log(util.inspect(efinanceResjson, false, null, true /* enable colors */ ))
             efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:calculateCommissionResponse'].result.message.EFBPS.BankSvcRs.RqUID = reqid
+            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:calculateCommissionResponse'].result.message.EFBPS.BankSvcRs.FeeInqRs.EPayBillRecID = envbody.banksvcrq.feeinqrq.epaybillrecid
             console.log(efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:calculateCommissionResponse'].result.message.EFBPS.BankSvcRs.RqUID)
             var xmlparser = new Parser(options);
             var modifiedres = xmlparser.parse(efinanceResjson);
@@ -134,6 +147,7 @@ router.get('/cards', async (req, res) => {
             var efinanceResjson = parser.parse((efinanceRes.response).toString(), options);
             console.log(util.inspect(efinanceResjson, false, null, true /* enable colors */ ))
             efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:confirmPaymentsResponse'].result.message.EFBPS.BankSvcRs.RqUID = reqid
+            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:confirmPaymentsResponse'].result.message.EFBPS.BankSvcRs.PmtAdviceRs.PmtRecAdviceStatus.PmtTransId.PmtId = Date.now()
             console.log(efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:confirmPaymentsResponse'].result.message.EFBPS.BankSvcRs.RqUID)
             var xmlparser = new Parser(options);
             var modifiedres = xmlparser.parse(efinanceResjson);
