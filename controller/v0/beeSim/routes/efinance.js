@@ -33,12 +33,13 @@ var options = {
 
 router.post('/bills', async (req, res) => {
     try {
-        console.log(req.body['env:envelope']['env:body'].hasOwnProperty('ins0:enquirebills'))
         console.log(util.inspect(req.body, false, null, true /* enable colors */ ))
-        console.log(req.headers['content-type'], ">>>>>>>>", "application/xml", "equality", req.headers['content-type'] == "application/xml;")
         if (req.body['env:envelope']['env:body'].hasOwnProperty('ins0:enquirebills')) {
-            var billerid = req.body['env:envelope']['env:body']['ins0:enquirebills'].request1.message.efbps.banksvcrq.billinqrq.accountid.billerid;
-            var envbody = req.body['env:envelope']['env:body']['ins0:enquirebills'].request1.message.efbps
+            var xmlparser = new Parser(options);
+            var efinanceReq = parser.parse((req.body['env:envelope']['env:body']['ins0:enquirebills'].request1.message).toString(), options);     
+
+            var billerid = efinanceReq.EFBPS.BankSvcRq.BillInqRq.AccountId.BillerId;
+            var envbody = efinanceReq.EFBPS
             console.log(billerid)
             var efinanceRes = await beePayload.findOne({
                 where: {
@@ -47,18 +48,23 @@ router.post('/bills', async (req, res) => {
             })
             var efinanceResjson = parser.parse((efinanceRes.response).toString(), options);
             console.log(util.inspect(efinanceResjson, false, null, true /* enable colors */ ))
-            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.RqUID = envbody.banksvcrq.rquid
-            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.BillInqRs.BillRec.BillInfo.AccountId.BillingAcct = envbody.banksvcrq.billinqrq.accountid.billingacct
-            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.BillInqRs.BillRec.BillInfo.AccountId.BillerId = envbody.banksvcrq.billinqrq.accountid.billerid
-            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.BillInqRs.BillRec.BillInfo.ServiceType = envbody.banksvcrq.billinqrq.ServiceType
+            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.RqUID = envbody.BankSvcRq.RqUID
+            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.BillInqRs.BillRec.BillInfo.AccountId.BillingAcct = envbody.BankSvcRq.BillInqRq.AccountId.BillingAcct
+            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.BillInqRs.BillRec.BillInfo.AccountId.BillerId = envbody.BankSvcRq.BillInqRq.AccountId.BillerId
+            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.BillInqRs.BillRec.BillInfo.ServiceType = envbody.BankSvcRq.BillInqRq.ServiceType
 
             console.log(efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.RqUID)
-            var xmlparser = new Parser(options);
+            
             var modifiedres = xmlparser.parse(efinanceResjson);
             res.status(200).contentType('application/XML').send((modifiedres).toString());
+
+
         } else if (req.body['env:envelope']['env:body'].hasOwnProperty('ins0:calculatecommission')) {
-            var reqid = req.body['env:envelope']['env:body']['ins0:calculatecommission'].request1.message.efbps.banksvcrq.rquid
-            var envbody = req.body['env:envelope']['env:body']['ins0:calculatecommission'].request1.message.efbps
+
+            var efinanceReq = parser.parse((req.body['env:envelope']['env:body']['ins0:calculatecommission'].request1.message).toString(), options);     
+            var envbody = efinanceReq.EFBPS
+
+            var reqid = envbody.BankSvcRq.RqUID
             var efinanceRes = await beePayload.findOne({
                 where: {
                     account_id: 99022
@@ -67,14 +73,17 @@ router.post('/bills', async (req, res) => {
             var efinanceResjson = parser.parse((efinanceRes.response).toString(), options);
             console.log(util.inspect(efinanceResjson, false, null, true /* enable colors */ ))
             efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:calculateCommissionResponse'].result.message.EFBPS.BankSvcRs.RqUID = reqid
-            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:calculateCommissionResponse'].result.message.EFBPS.BankSvcRs.FeeInqRs.EPayBillRecID = envbody.banksvcrq.feeinqrq.epaybillrecid
+            efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:calculateCommissionResponse'].result.message.EFBPS.BankSvcRs.FeeInqRs.EPayBillRecID = envbody.BankSvcRq.FeeInqRq.EpayBillRecID
 
             console.log(efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:calculateCommissionResponse'].result.message.EFBPS.BankSvcRs.RqUID)
             var xmlparser = new Parser(options);
             var modifiedres = xmlparser.parse(efinanceResjson);
             res.status(200).contentType('application/XML').send((modifiedres).toString());
         } else if (req.body['env:envelope']['env:body'].hasOwnProperty('ins0:confirmpayments')) {
-            var reqid = req.body['env:envelope']['env:body']['ins0:confirmpayments'].request1.message.efbps.banksvcrq.rquid
+            var efinanceReq = parser.parse((req.body['env:envelope']['env:body']['ins0:confirmpayments'].request1.message).toString(), options);     
+            var envbody = efinanceReq.EFBPS
+
+            var reqid = envbody.BankSvcRq.RqUID
             var efinanceRes = await beePayload.findOne({
                 where: {
                     account_id: 99023
@@ -93,7 +102,7 @@ router.post('/bills', async (req, res) => {
             res.status(400).send('bad xml');
         }
     } catch (e) {
-        res.status(500).send('internal server error ');
+        res.status(500).send('service account id is not in database ');
     }
 });
 
