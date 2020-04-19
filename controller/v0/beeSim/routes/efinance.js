@@ -31,7 +31,7 @@ var options = {
     arrayMode: false
 };
 
-router.get('/bills', async (req, res) => {
+router.post('/bills', async (req, res) => {
     try {
         console.log(req.body['env:envelope']['env:body'].hasOwnProperty('ins0:enquirebills'))
         console.log(util.inspect(req.body, false, null, true /* enable colors */ ))
