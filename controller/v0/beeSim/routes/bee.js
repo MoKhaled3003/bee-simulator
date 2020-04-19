@@ -40,7 +40,7 @@ router.post('/payment', async (req, res) => {
     console.log(util.inspect(req.body, false, null, true /* enable colors */))
     console.log(req.headers['content-type'] ,">>>>>>>>", "application/xml",
     "equality",req.headers['content-type'] =="application/xml;")
-        if(req.headers['content-type'] =="application/xml;" && req.body.request.data.serviceaccountid){
+        if(req.body.request.data.serviceaccountid){
         var beeres = await beePayload.findOne({ where :{
           account_id: req.body.request.data.serviceaccountid
         }})
