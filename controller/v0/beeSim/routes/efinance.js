@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const _ = require('lodash')
 const beePayload = require("../../indexModels")["beePayload"];
 var {
     sequelize
@@ -36,7 +37,7 @@ router.post('/bills', async (req, res) => {
         console.log(util.inspect(req.body, false, null, true /* enable colors */ ))
         if (req.body['env:envelope']['env:body'].hasOwnProperty('ins0:enquirebills')) {
             var xmlparser = new Parser(options);
-            var efinanceReq = parser.parse((req.body['env:envelope']['env:body']['ins0:enquirebills'].request1.message).toString(), options);     
+            var efinanceReq = parser.parse((req.body['env:envelope']['env:body']['ins0:enquirebills'].request1.message).toString(), options);
 
             var billerid = efinanceReq.EFBPS.BankSvcRq.BillInqRq.AccountId.BillerId;
             var envbody = efinanceReq.EFBPS
@@ -54,14 +55,15 @@ router.post('/bills', async (req, res) => {
             efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.BillInqRs.BillRec.BillInfo.ServiceType = envbody.BankSvcRq.BillInqRq.ServiceType
 
             console.log(efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.RqUID)
-            
+
             var modifiedres = xmlparser.parse(efinanceResjson);
-            res.status(200).contentType('application/XML').send((modifiedres).toString());
+            var efinanceResFinal = await getpayload(modifiedres, "enquireBillsResponse")
+            res.status(200).contentType('application/XML').send(efinanceResFinal);
 
 
         } else if (req.body['env:envelope']['env:body'].hasOwnProperty('ins0:calculatecommission')) {
 
-            var efinanceReq = parser.parse((req.body['env:envelope']['env:body']['ins0:calculatecommission'].request1.message).toString(), options);     
+            var efinanceReq = parser.parse((req.body['env:envelope']['env:body']['ins0:calculatecommission'].request1.message).toString(), options);
             var envbody = efinanceReq.EFBPS
 
             var reqid = envbody.BankSvcRq.RqUID
@@ -78,9 +80,10 @@ router.post('/bills', async (req, res) => {
             console.log(efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:calculateCommissionResponse'].result.message.EFBPS.BankSvcRs.RqUID)
             var xmlparser = new Parser(options);
             var modifiedres = xmlparser.parse(efinanceResjson);
-            res.status(200).contentType('application/XML').send((modifiedres).toString());
+            var efinanceResFinal = await getpayload(modifiedres, "calculateCommissionResponse")
+            res.status(200).contentType('application/XML').send(efinanceResFinal);
         } else if (req.body['env:envelope']['env:body'].hasOwnProperty('ins0:confirmpayments')) {
-            var efinanceReq = parser.parse((req.body['env:envelope']['env:body']['ins0:confirmpayments'].request1.message).toString(), options);     
+            var efinanceReq = parser.parse((req.body['env:envelope']['env:body']['ins0:confirmpayments'].request1.message).toString(), options);
             var envbody = efinanceReq.EFBPS
 
             var reqid = envbody.BankSvcRq.RqUID
@@ -97,8 +100,9 @@ router.post('/bills', async (req, res) => {
             console.log(efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:confirmPaymentsResponse'].result.message.EFBPS.BankSvcRs.RqUID)
             var xmlparser = new Parser(options);
             var modifiedres = xmlparser.parse(efinanceResjson);
-            res.status(200).contentType('application/XML').send((modifiedres).toString());
-        }else{
+            var efinanceResFinal = await getpayload(modifiedres, "confirmPaymentsResponse")
+            res.status(200).contentType('application/XML').send(efinanceResFinal);
+        } else {
             res.status(400).send('bad xml');
         }
     } catch (e) {
@@ -130,7 +134,8 @@ router.get('/cards', async (req, res) => {
             console.log(efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.RqUID)
             var xmlparser = new Parser(options);
             var modifiedres = xmlparser.parse(efinanceResjson);
-            res.status(200).contentType('application/XML').send((modifiedres).toString());
+            var efinanceResFinal = await getpayload(modifiedres, "enquireBillsResponse")
+            res.status(200).contentType('application/XML').send(efinanceResFinal);
         } else if (req.body['env:envelope']['env:body'].hasOwnProperty('ins0:calculatecommission')) {
             var reqid = req.body['env:envelope']['env:body']['ins0:calculatecommission'].request1.message.efbps.banksvcrq.rquid
             var efinanceRes = await beePayload.findOne({
@@ -145,7 +150,8 @@ router.get('/cards', async (req, res) => {
             console.log(efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:calculateCommissionResponse'].result.message.EFBPS.BankSvcRs.RqUID)
             var xmlparser = new Parser(options);
             var modifiedres = xmlparser.parse(efinanceResjson);
-            res.status(200).contentType('application/XML').send((modifiedres).toString());
+            var efinanceResFinal = await getpayload(modifiedres, "calculateCommissionResponse")
+            res.status(200).contentType('application/XML').send(efinanceResFinal);
         } else if (req.body['env:envelope']['env:body'].hasOwnProperty('ins0:confirmpayments')) {
             var reqid = req.body['env:envelope']['env:body']['ins0:confirmpayments'].request1.message.efbps.banksvcrq.rquid
             var efinanceRes = await beePayload.findOne({
@@ -160,8 +166,9 @@ router.get('/cards', async (req, res) => {
             console.log(efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:confirmPaymentsResponse'].result.message.EFBPS.BankSvcRs.RqUID)
             var xmlparser = new Parser(options);
             var modifiedres = xmlparser.parse(efinanceResjson);
-            res.status(200).contentType('application/XML').send((modifiedres).toString());
-        }else{
+            var efinanceResFinal = await getpayload(modifiedres, "confirmPaymentsResponse")
+            res.status(200).contentType('application/XML').send(efinanceResFinal);
+        } else {
             res.status(400).send('bad xml');
         }
     } catch (e) {
@@ -175,5 +182,27 @@ router.get('/getFees', async (req, res) => {
 
 
 });
+
+async function getpayload(msg, action) { //payload of efinance 
+    msg = msg.toString('utf8');
+    var escaped_msg = _.escape(msg);
+    return `<?xml version="1.0"?>
+    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+        xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <soapenv:Header/>
+        <soapenv:Body>
+            <p375:${action} xmlns:p375="urn:BillPaymentService/types">
+                <result>
+                    <message>${escaped_msg}</message>
+                    <receiverID>0024</receiverID>
+                    <signature>H5MjpFW35m3BbMUgjOrJkIsx0hH86aop/4RwubdEPaGHh99/HC59oFBwP12NfzA9Rd4Gq7H4tl38 Xx0eY6NESt90OSBRDwkF0sbqisAYORh3x3RzhOVx8NR47vHjl1Yyn6pUYRUGuVsWAayYhUuaxd2O ipI4nvBYoubfJl30v1Y=</signature>
+                </result>
+            </p375:${action}>
+        </soapenv:Body>
+    </soapenv:Envelope>
+    `;
+}
 
 module.exports = router;
