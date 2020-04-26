@@ -195,7 +195,7 @@ async function getpayload(msg, action) { //payload of efinance
         <soapenv:Body>
             <p375:${action} xmlns:p375="urn:BillPaymentService/types">
                 <result>
-                    <message>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;s${escaped_msg}</message>
+                    <message>${escaped_msg}</message>
                     <receiverID>0024</receiverID>
                     <signature>H5MjpFW35m3BbMUgjOrJkIsx0hH86aop/4RwubdEPaGHh99/HC59oFBwP12NfzA9Rd4Gq7H4tl38 Xx0eY6NESt90OSBRDwkF0sbqisAYORh3x3RzhOVx8NR47vHjl1Yyn6pUYRUGuVsWAayYhUuaxd2O ipI4nvBYoubfJl30v1Y=</signature>
                 </result>
