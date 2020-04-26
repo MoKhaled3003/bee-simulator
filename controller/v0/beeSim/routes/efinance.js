@@ -39,12 +39,10 @@ router.post('/bills', async (req, res) => {
             var xmlparser = new Parser(options);
             var efinanceReq = parser.parse((req.body['env:envelope']['env:body']['ins0:enquirebills'].request1.message).toString(), options);
 
-            var billerid = efinanceReq.EFBPS.BankSvcRq.BillInqRq.AccountId.BillerId;
             var envbody = efinanceReq.EFBPS
-            console.log(billerid)
             var efinanceRes = await beePayload.findOne({
                 where: {
-                    account_id: billerid
+                    account_id: 99007
                 }
             })
             var efinanceResjson = parser.parse((efinanceRes.response).toString(), options);
@@ -117,12 +115,10 @@ router.get('/cards', async (req, res) => {
         console.log(util.inspect(req.body, false, null, true /* enable colors */ ))
         console.log(req.headers['content-type'], ">>>>>>>>", "application/xml", "equality", req.headers['content-type'] == "application/xml;")
         if (req.body['env:envelope']['env:body'].hasOwnProperty('ins0:enquirebills')) {
-            var billerid = req.body['env:envelope']['env:body']['ins0:enquirebills'].request1.message.efbps.banksvcrq.billinqrq.accountid.billerid;
             var envbody = req.body['env:envelope']['env:body']['ins0:enquirebills'].request1.message.efbps
-            console.log(billerid)
             var efinanceRes = await beePayload.findOne({
                 where: {
-                    account_id: billerid
+                    account_id: 99007
                 }
             })
             var efinanceResjson = parser.parse((efinanceRes.response).toString(), options);
