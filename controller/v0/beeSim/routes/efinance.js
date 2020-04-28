@@ -46,13 +46,13 @@ router.post('/bills', async (req, res) => {
                 }
             })
             var efinanceResjson = parser.parse((efinanceRes.response).toString(), options);
-            console.log(util.inspect(efinanceResjson, false, null, true /* enable colors */ ))
             efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.RqUID = envbody.BankSvcRq.RqUID
             efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.BillInqRs.BillRec.BillInfo.AccountId.BillingAcct = envbody.BankSvcRq.BillInqRq.AccountId.BillingAcct
             efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.BillInqRs.BillRec.BillInfo.AccountId.BillerId = envbody.BankSvcRq.BillInqRq.AccountId.BillerId
             efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.BillInqRs.BillRec.BillInfo.ServiceType = envbody.BankSvcRq.BillInqRq.ServiceType
 
             console.log(efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message.EFBPS.BankSvcRs.RqUID)
+            console.log(util.inspect(efinanceResjson, false, null, true /* enable colors */ ))
 
             var modifiedres = xmlparser.parse(efinanceResjson['soapenv:Envelope']['soapenv:Body']['p375:enquireBillsResponse'].result.message);
             var efinanceResFinal = await getpayload(modifiedres, "enquireBillsResponse")
