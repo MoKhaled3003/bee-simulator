@@ -65,30 +65,29 @@ router.post('/payment', async (req, res) => {
           var modifiedres = xmlparser.parse(beeresjson);
           res.status(200).contentType('application/XML').send(modifiedres);
         }else{
-          res.status(400).contentType('application/XML').send('param is not matching');
+          res.status(400).contentType('application/XML').send('Key is not matching');
         }
       } else if(typeof req.body.request.data.requestmap === 'object'){
         console.log('there is request map')
-        if (req.body.request.data.requestmap.item.value == '' || req.body.request.data.requestmap.item.key == '') {
-          req.body.request.data.requestmap.item.value = null
-          req.body.request.data.requestmap.item.key = null
-          console.log('after edit request', req.body.request.data.requestmap.item.value)
-        }
-          if(req.body.request.data.requestmap.item.value == beeres.params && req.body.request.data.requestmap.item.key == beereqjson.Request.data.requestMap.item.key ){
+        // if (req.body.request.data.requestmap.item.value == '') {
+        //   req.body.request.data.requestmap.item.value = null
+        //   console.log('after edit request', req.body.request.data.requestmap.item.value)
+        // }
+          if(req.body.request.data.requestmap.item.key == beereqjson.Request.data.requestMap.item.key ){
             beeresjson.Response.data.transactionId = req.body.request.data.transactionid
             var xmlparser = new Parser(options);
             var modifiedres = xmlparser.parse(beeresjson);
             res.status(200).contentType('application/XML').send(modifiedres);
         }else{
-          res.status(400).contentType('application/XML').send('param is not matching');
+          res.status(400).contentType('application/XML').send('Key is not matching');
         }
       }
     } else {
-      res.status(400).contentType('application/XML').send('bad xml content or service id ');
+      res.status(400).contentType('application/XML').send('there is no service id tag');
     }
 
   } catch (e) {
-    res.status(500).send('internal server error ');
+    res.status(404).send('there is no service in DB');
   }
 });
 
