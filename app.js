@@ -3,10 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var indexRouter = require('./controller/v1/indexRouter');
-var V0MODELS = require('./controller/v1/indexModels')
+var indexRouter = require('./controller/v0/indexRouter');
+var V0MODELS = require('./controller/v0/indexModels')
 var xmlparser = require('express-xml-bodyparser');
-var {sequelize} = require('./controller/v1/indexModels');
+var {sequelize} = require('./controller/v0/indexModels');
 
 
 
@@ -39,7 +39,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api/v1', indexRouter);
+app.use('/api/v0', indexRouter);
 
 
 // catch 404 and forward to error handler
