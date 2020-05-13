@@ -6,9 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     amount: DataTypes.DECIMAL(10, 2),
     totalAmount: DataTypes.DECIMAL(10, 2),
     request: DataTypes.BLOB,
-    response: DataTypes.BLOB,
-    action: DataTypes.STRING,
-    used:DataTypes.STRING
+    response: DataTypes.BLOB
   }, {});
   beePayload.associate = function(models) {
     // associations can be defined here
