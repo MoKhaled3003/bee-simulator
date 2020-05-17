@@ -4,7 +4,9 @@ const beePayload = require("../../indexModels")["beePayload"];
 var {
   sequelize
 } = require('./../../indexModels');
-const { Op } = require("sequelize");
+const {
+  Op
+} = require("sequelize");
 const util = require('util')
 
 
@@ -31,35 +33,46 @@ var options = {
 
 
 router.get('/inquiry', async (req, res) => {
-  
+
 });
 
 router.post('/payment', async (req, res) => {
-  try{
-    console.log(util.inspect(req.body, false, null, true /* enable colors */))
-        if(req.body.request.data.serviceaccountid){
-        var beeres = await beePayload.findOne({ where :{
-          account_id: req.body.request.data.serviceaccountid
-        }})
-        var beeresjson = parser.parse((beeres.response).toString(),options);
-    
+  try {
+    console.log(util.inspect(req.body, false, null, true /* enable colors */ ))
+    if (req.body.request.data.serviceaccountid) {
+      if (req.body.request.data.serviceaccountid == 50103) {
+        var beeres = await beePayload.findOne({
+          where: {
+            account_id: req.body.request.data.serviceaccountid,
+            params: req.body.request.data.requestmap.item.value
+          }
+        })
+      } else {
+        var beeres = await beePayload.findOne({
+          where: {
+            account_id: req.body.request.data.serviceaccountid
+          }
+        })
+      }
+      var beeresjson = parser.parse((beeres.response).toString(), options);
+
       console.log(beeresjson)
       beeresjson.Response.data.transactionId = req.body.request.data.transactionid
       console.log(beeresjson.Response.data.transactionId)
-  
+
       var xmlparser = new Parser(options);
       var modifiedres = xmlparser.parse(beeresjson);
-       res.status(200).contentType('application/XML').send(modifiedres);
-    }else{
+      res.status(200).contentType('application/XML').send(modifiedres);
+    } else {
       res.status(400).contentType('application/XML').send('bad xml content type or service id ');
     }
-    
-  }catch(e){
+
+  } catch (e) {
     console.log(e)
     res.status(500).send('internal server error ');
   }
-  
-     
+
+
   // console.log(Object.keys(req.body.request.data.requestmap))
   // console.log(beeres)
   //    console.log( "->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",typeof req.body.request.data.requestmap)
@@ -67,7 +80,7 @@ router.post('/payment', async (req, res) => {
   //   console.log('no request map')
   //   if(!beeres.params&& beeres.action == "RR"){
   //   console.log('null param')
-      
+
   //     var beeresjson = parser.parse((beeres.response).toString(),options);
 
   //   console.log(beeresjson)
@@ -86,7 +99,7 @@ router.post('/payment', async (req, res) => {
   //   console.log('from database',beeres.params)
   //   console.log('from request',req.body.request.data.requestmap.item.value)
 
-    
+
   //   if(req.body.request.data.requestmap.item.value == ''){
   //     req.body.request.data.requestmap.item.value = null;
   //   console.log('after edit request',req.body.request.data.requestmap.item.value)
@@ -110,7 +123,7 @@ router.post('/payment', async (req, res) => {
 });
 
 router.get('/list', async (req, res) => {
-  
+
 
 });
 
