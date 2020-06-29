@@ -23,6 +23,17 @@ app.use(xmlparser({
   explicitArray : false
 }));
 
+app.use((err, req, res, next) => {
+  // you can error out to stderr still, or not; your choice
+  console.error(err); 
+
+  // body-parser will set this to 400 if the json is in error
+  if(err.status === 400)
+    return res.status(err.status).send('bad XML content');
+
+  return next(err); // if it's not a 400, let the default error handling do it. 
+});
+
 app.use(logger('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

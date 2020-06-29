@@ -36,10 +36,7 @@ router.get('/inquiry', async (req, res) => {
 
 router.post('/payment', async (req, res) => {
   try{
-    console.log(req.headers['content-type'])
     console.log(util.inspect(req.body, false, null, true /* enable colors */))
-    console.log(req.headers['content-type'] ,">>>>>>>>", "application/xml",
-    "equality",req.headers['content-type'] =="application/xml;")
         if(req.body.request.data.serviceaccountid){
         var beeres = await beePayload.findOne({ where :{
           account_id: req.body.request.data.serviceaccountid
@@ -58,6 +55,7 @@ router.post('/payment', async (req, res) => {
     }
     
   }catch(e){
+    console.log(e)
     res.status(500).send('internal server error ');
   }
   
