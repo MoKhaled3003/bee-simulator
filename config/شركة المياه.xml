@@ -1,0 +1,393 @@
+
+request inquire 
+
+
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ns2="urn:BillPaymentService/wsdl"
+    xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:ins0="urn:BillPaymentService/types">
+    <env:Body>
+        <ins0:enquireBills>
+            <request1>
+                <message>
+                    <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                    <EFBPS>
+                        <SignonRq>
+                            <ClientDt>2020-06-20T15:40:06.592</ClientDt>
+                            <LanguagePref>ar-eg</LanguagePref>
+                            <SignonProfile>
+                                <Sender>0024</Sender>
+                                <Receiver>EPAY</Receiver>
+                                <MsgCode>RBINQRQ</MsgCode>
+                            </SignonProfile>
+                        </SignonRq>
+                        <BankSvcRq>
+                            <RqUID>Damen1575120200620154006</RqUID>
+                            <BillInqRq>
+                                <BankId>1024</BankId>
+                                <AccessChannel>POS</AccessChannel>
+                                <AccountId>
+                                     <BillingAcct>206111185</BillingAcct>
+                                    <BillerId>99045</BillerId>
+                                </AccountId>
+                                <ServiceType>ECP</ServiceType>
+                            </BillInqRq>
+                        </BankSvcRq>
+                    </EFBPS>
+                </message>
+                <senderID>0024</senderID>
+                <signature>YHp/X4zkExptl+VKJ+1l8ZtiXm6fcMhOcp7PQTxb6MHAtvN54tnCWdia/Tmd
+/fwU6owTzP/xJKcPIU3N4U0oHrA/RUCmtJwJF2Cg5wjk+r+PNSDgnyWoTfzk
+SPHxCUPzqBn0yFYawbuFHcfZ5T7/V/xVFT6UTWg5vUL0Yf1v3qlVNgnWyGTh
+crweBDJdzyw6lH4wASgtDk87gxgoV+Be6w6qicpK/JxG4JhtmBMNF1tf0pb0
+9K9XAMU0HHSFruR21/lF+4DjfJWzQSgkwcuw1M0ddALOvTksWtyW1TvN6uEn
+lahs4Xo6twlPuXviZhgMuPiLV9ieu7PiwUsmy4higA==
+</signature>
+            </request1>
+        </ins0:enquireBills>
+    </env:Body>
+</env:Envelope>
+
+response  inquire 
+
+
+
+
+
+<?xml version="1.0"?>
+<soapenv:Envelope
+    xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <p375:enquireBillsResponse
+            xmlns:p375="urn:BillPaymentService/types">
+            <result>
+                <message>
+                    <EFBPS>
+                        <SignonRq>
+                            <ClientDt>2020-06-20T15:40:22.173</ClientDt>
+                            <LanguagePref>ar-eg</LanguagePref>
+                            <SignonProfile>
+                                <Sender>EPAY</Sender>
+                                <Receiver>0024</Receiver>
+                                <MsgCode>RBINQRS</MsgCode>
+                            </SignonProfile>
+                        </SignonRq>
+                        <BankSvcRs>
+                            <Status>
+                                <StatusCode>0</StatusCode>
+                                <ShortDesc>Success</ShortDesc>
+                            </Status>
+                            <RqUID>Damen1575120200620154006</RqUID>
+                            <BillInqRs>
+                                <RecCount>1</RecCount>
+                                <BillRec>
+                                    <BillUploadStatusCode>BillNew</BillUploadStatusCode>
+                                    <BillPresentmentStatusCode>BillUnpaid</BillPresentmentStatusCode>
+                                    <DisplayLabel>
+                                        <LanguagePref>ar-eg</LanguagePref>
+                                        <Text>&#x645;&#x62F;&#x641;&#x648;&#x639;&#x627;&#x62A; &#x634;&#x631;&#x643;&#x629; &#x645;&#x64A;&#x627;&#x629; &#x627;&#x644;&#x642;&#x627;&#x647;&#x631;&#x629;</Text>
+                                    </DisplayLabel>
+                                    <DisplayLabel>
+                                        <LanguagePref>en-gb</LanguagePref>
+                                        <Text>Cairo Water Payment</Text>
+                                    </DisplayLabel>
+                                    <Msg>
+                                        <LanguagePref>ar-eg</LanguagePref>
+                                        <Text>&#x627;&#x644;&#x627;&#x633;&#x645; : &#x633;&#x647;&#x64A;&#x631; &#x627;&#x644;&#x633;&#x64A;&#x62F; &#x645;&#x62D;&#x645;&#x62F; / &#x627;&#x644;&#x641;&#x631;&#x639; : &#x62D;&#x644;&#x648;&#x627;&#x646; / &#x627;&#x644;&#x642;&#x637;&#x627;&#x639; : &#x62C;&#x646;&#x648;&#x628; &#x648;&#x63A;&#x631;&#x628; / &#x627;&#x644;&#x639;&#x646;&#x648;&#x627;&#x646; : &#x634;&#x642;&#x647; 22 &#x628;&#x644;&#x648;&#x643; 10 &#x645;&#x62F;&#x62E;&#x644; 2 &#x627;&#x644;&#x632;&#x644;&#x632;&#x627;&#x644; / &#x641;&#x627;&#x62A;&#x648;&#x631;&#x629; &#x634;&#x647;&#x631; : &#x646;&#x648;&#x641;&#x645;&#x628;&#x631;2019</Text>
+                                    </Msg>
+                                    <Msg>
+                                        <LanguagePref>en-gb</LanguagePref>
+                                        <Text>&#x627;&#x644;&#x627;&#x633;&#x645; : &#x633;&#x647;&#x64A;&#x631; &#x627;&#x644;&#x633;&#x64A;&#x62F; &#x645;&#x62D;&#x645;&#x62F; / &#x627;&#x644;&#x641;&#x631;&#x639; : &#x62D;&#x644;&#x648;&#x627;&#x646; / &#x627;&#x644;&#x642;&#x637;&#x627;&#x639; : &#x62C;&#x646;&#x648;&#x628; &#x648;&#x63A;&#x631;&#x628; / &#x627;&#x644;&#x639;&#x646;&#x648;&#x627;&#x646; : &#x634;&#x642;&#x647; 22 &#x628;&#x644;&#x648;&#x643; 10 &#x645;&#x62F;&#x62E;&#x644; 2 &#x627;&#x644;&#x632;&#x644;&#x632;&#x627;&#x644; / &#x641;&#x627;&#x62A;&#x648;&#x631;&#x629; &#x634;&#x647;&#x631; : &#x646;&#x648;&#x641;&#x645;&#x628;&#x631;2019</Text>
+                                    </Msg>
+                                    <EPayBillRecID>1e067973-3b62-4cb3-8dd1-295bb2c7a0f4</EPayBillRecID>
+                                    <BillInfo>
+                                        <BillCategory>BBP</BillCategory>
+                                        <ServiceType>ECP</ServiceType>
+                                        <BillNumber>206111185-2006201540221063</BillNumber>
+                                        <AccountId>
+                                            <BillingAcct>206111185</BillingAcct>
+                                            <BillerId>99045</BillerId>
+                                        </AccountId>
+                                        <CurAmt>
+                                            <Sequence>1</Sequence>
+                                            <OriginalAmt>83.04</OriginalAmt>
+                                            <AmtDue>83.04</AmtDue>
+                                            <CurCode>818</CurCode>
+                                            <ExactPmt>true</ExactPmt>
+                                            <PymtMode>Range</PymtMode>
+                                            <RangeInfo>
+                                                <MinAmt>83.04</MinAmt>
+                                                <MaxAmt>83.04</MaxAmt>
+                                            </RangeInfo>
+                                            <ShortDesc>
+                                                <LanguagePref>en-gb</LanguagePref>
+                                                <Text>&#x646;&#x648;&#x641;&#x645;&#x628;&#x631;2019</Text>
+                                            </ShortDesc>
+                                            <ShortDesc>
+                                                <LanguagePref>ar-eg</LanguagePref>
+                                                <Text>&#x646;&#x648;&#x641;&#x645;&#x628;&#x631;2019</Text>
+                                            </ShortDesc>
+                                            <SettleAccCode>2054</SettleAccCode>
+                                        </CurAmt>
+                                        <DueDt>2020-06-20T00:00:00</DueDt>
+                                        <BillRefInfo>140064046</BillRefInfo>
+                                    </BillInfo>
+                                </BillRec>
+                            </BillInqRs>
+                        </BankSvcRs>
+                    </EFBPS>
+                </message>
+                <receiverID>0024</receiverID>
+                <signature>PJJDSYUYzCiq7nY6/WbNVHgwlEZ24l1E0Dybot5QrmoQMYgFGVK3LJ1A46XHBROfTzrh5m8xAuRH
+GT6Y0TR+s5PHw4lfhMI9bBiffnMA0JdZfsJUUqiYFW72xoY+w6ukeEL3S/XMNdZqw4qCRfINXbcw
+y7eqaToCYTjwte573LM=</signature>
+            </result>
+        </p375:enquireBillsResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+request calculate comissions 
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ns2="urn:BillPaymentService/wsdl"
+    xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:ins0="urn:BillPaymentService/types">
+    <env:Body>
+        <ins0:calculateCommission>
+            <request1>
+                <message>
+                    <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                    <EFBPS>
+                        <SignonRq>
+                            <ClientDt>2020-06-20T15:40:14.768</ClientDt>
+                            <LanguagePref>ar-eg</LanguagePref>
+                            <SignonProfile>
+                                <Sender>0024</Sender>
+                                <Receiver>EPAY</Receiver>
+                                <MsgCode>RFINQRQ</MsgCode>
+                            </SignonProfile>
+                        </SignonRq>
+                        <BankSvcRq>
+                            <RqUID>Damen1575120200620154014</RqUID>
+                            <FeeInqRq>
+                                <EPayBillRecID>1e067973-3b62-4cb3-8dd1-295bb2c7a0f4</EPayBillRecID>
+                                <PayAmt>
+                                    <Sequence>1</Sequence>
+                                    <Amt>83.04</Amt>
+                                    <CurCode>818</CurCode>
+                                </PayAmt>
+                            </FeeInqRq>
+                        </BankSvcRq>
+                    </EFBPS>
+                </message>
+                <senderID>0024</senderID>
+                <signature>hh36IYGSlEZpuorhXZpAn6qeCiCay4UK8sh4vMgtWLdpL5+nDLhXUuowNGnp
+5crtIF9iVcgfF6c+NvHEzXtcsYMw1eZJNOWZoFlaZba45TB8moaei2eTIerB
+noMN9NR0m8oXpcdCETZ/zZ/e28GGWdRUC9/mD+0vQz+KDd00N/+vdTOHUwFV
+vYdYpO/zODyTPh/cH1F/Rb73Ql2k/Q1C1z6U0xfHk6F/EUFKF7OJu8aNcpYD
+LIpi5jXVzTKk3TZA0yOyOf6i3S+VXdkeLuf2oD2qEQpVFXZMwMklmlkUEhYf
+mtmQCsRbLHIshLjJHIIc8NsK/AizyE+GWWk2avwruQ==
+</signature>
+            </request1>
+        </ins0:calculateCommission>
+    </env:Body>
+</env:Envelope>
+
+response calculate comissions
+
+
+
+<?xml version="1.0"?>
+<soapenv:Envelope
+    xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <p375:calculateCommissionResponse
+            xmlns:p375="urn:BillPaymentService/types">
+            <result>
+                <message>
+                    <EFBPS>
+                        <SignonRq>
+                            <ClientDt>2020-06-20T15:40:29.353</ClientDt>
+                            <LanguagePref>ar-eg</LanguagePref>
+                            <SignonProfile>
+                                <Sender>EPAY</Sender>
+                                <Receiver>0024</Receiver>
+                                <MsgCode>RFINQRS</MsgCode>
+                            </SignonProfile>
+                        </SignonRq>
+                        <BankSvcRs>
+                            <Status>
+                                <StatusCode>0</StatusCode>
+                                <ShortDesc>Request processed successfully</ShortDesc>
+                            </Status>
+                            <RqUID>Damen1575120200620154014</RqUID>
+                            <FeeInqRs>
+                                <EPayBillRecID>1e067973-3b62-4cb3-8dd1-295bb2c7a0f4</EPayBillRecID>
+                                <FeesAmt>
+                                    <Amt>4.56</Amt>
+                                    <CurCode>818</CurCode>
+                                </FeesAmt>
+                            </FeeInqRs>
+                        </BankSvcRs>
+                    </EFBPS>
+                </message>
+                <receiverID>0024</receiverID>
+                <signature>iL1tdetFJnhqyXUH4p8ut/m+4L9dRObU5nEICqVTuBMgsnfTTNItF66c850mYLMon4+rkJgnj1tY
+pN8pe1D4GeOBVk/1FsXGy920YhKZh5+jBEmRWw+c3DNvqIrDNPiS1ShpsmKJ/BmeHwNFDDOOAyoL
++tjPP1CKJKsP8g0RlM4=</signature>
+            </result>
+        </p375:calculateCommissionResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+request confirmPayments  
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ns2="urn:BillPaymentService/wsdl"
+    xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:ins0="urn:BillPaymentService/types">
+    <env:Body>
+        <ins0:confirmPayments>
+            <request1>
+                <message>
+                    <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                    <EFBPS>
+                        <SignonRq>
+                            <ClientDt>2020-06-20T15:39:30.428</ClientDt>
+                            <LanguagePref>ar-eg</LanguagePref>
+                            <SignonProfile>
+                                <Sender>0024</Sender>
+                                <Receiver>EPAY</Receiver>
+                                <MsgCode>RPADVRQ</MsgCode>
+                            </SignonProfile>
+                        </SignonRq>
+                        <BankSvcRq>
+                            <RqUID>Damen1575120200620153930</RqUID>
+                            <PmtAdviceRq>
+                                <EPayBillRecID>ccbec3e8-a38a-4c48-b968-de0f92d021b5</EPayBillRecID>
+                                <PmtRec>
+                                    <PmtTransId>
+                                        <PmtId>Damen1575120200620153930</PmtId>
+                                        <PmtIdType>BNKPTN</PmtIdType>
+                                    </PmtTransId>
+                                    <PmtInfo>
+                                        <PayAmt>
+                                            <Sequence>1</Sequence>
+                                            <Amt>82.6</Amt>
+                                            <CurCode>818</CurCode>
+                                        </PayAmt>
+                                        <FeesAmt>
+                                            <Amt>4.56</Amt>
+                                            <CurCode>818</CurCode>
+                                        </FeesAmt>
+                                        <PrcDt>2020-06-20T15:39:30.428</PrcDt>
+                                        <BillNumber>206111185-2006201539322295</BillNumber>
+                                        <AccountId>
+                                            <BillingAcct>206111185</BillingAcct>
+                                            <BillerId>99045</BillerId>
+                                        </AccountId>
+                                        <BankId>1024</BankId>
+                                        <AccessChannel>POS</AccessChannel>
+                                        <PmtMethod>ACTDEB</PmtMethod>
+                                        <PmtRefInfo>138829023</PmtRefInfo>
+                                    </PmtInfo>
+                                </PmtRec>
+                            </PmtAdviceRq>
+                        </BankSvcRq>
+                    </EFBPS>
+                </message>
+                <senderID>0024</senderID>
+                <signature>fNrWMOhXSdsNNN/4n3VGSJ+3uC4E8MLOG4DeyL7SlCGRwLTa13JeHw53JRF5
+DNlRcE/iF6Zl00TRBuIHWs3o2NgJ48sI2cFPSFY34+rrpG60pryhjB7PhpJU
+jTD6A57hOKcbRrs3bqR/NbM90LVeDXZDqc4jzCEhKhAL4owzF7bXqGrEPoaG
+7dr4o2m/bRQq8zSdOtcCiQ1Eelgz6Hv96rIhhGHDRkHVUZT37VEwqxXs+Xkd
+pGsQHme7S92ciUyDFKQZ0XdrRJgfxw+s6QOFaKl8JWTi8VmaLYbS22dYn0ks
+Zdn3Eqv/LnCNgk59yV4iwoR6brPVvH2FB/2WZPbS4w==
+</signature>
+            </request1>
+        </ins0:confirmPayments>
+    </env:Body>
+</env:Envelope>
+
+response  confirm payment 
+
+
+
+
+<soapenv:Envelope
+    xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <p375:confirmPaymentsResponse
+            xmlns:p375="urn:BillPaymentService/types">
+            <result>
+                <message>
+                    <EFBPS>
+                        <SignonRq>
+                            <ClientDt>2020-06-20T15:39:45.209</ClientDt>
+                            <LanguagePref>ar-eg</LanguagePref>
+                            <SignonProfile>
+                                <Sender>EPAY</Sender>
+                                <Receiver>0024</Receiver>
+                                <MsgCode>RPADVRS</MsgCode>
+                            </SignonProfile>
+                        </SignonRq>
+                        <BankSvcRs>
+                            <Status>
+                                <StatusCode>0</StatusCode>
+                                <ShortDesc>Payment Advice Accepted</ShortDesc>
+                            </Status>
+                            <RqUID>Damen1575120200620153930</RqUID>
+                            <PmtAdviceRs>
+                                <PmtRecAdviceStatus>
+                                    <PmtTransId>
+                                        <PmtId>202099001219403200</PmtId>
+                                        <PmtIdType>EPTN</PmtIdType>
+                                    </PmtTransId>
+                                    <SettlDt>2020-06-21T00:00:00.000</SettlDt>
+                                </PmtRecAdviceStatus>
+                            </PmtAdviceRs>
+                        </BankSvcRs>
+                    </EFBPS>
+                </message>
+                <receiverID>0024</receiverID>
+                <signature>Pn2KFsrQDqQp+GJQq2XU8+hZnFWVLgdm1J6paKw27s0ICGxj8lwH+4VNrRLCf4uL7hyUssV0XCuw
+fxuFj89LILE6fIRxnEjK4SMu5q9SXCqWDENFSup0Z+Yt7pfSc9RN0s2spF3aUGy+65BaIyHoJ6HW
+8yyHHPE2cQUYLfRMnn8=</signature>
+            </result>
+        </p375:confirmPaymentsResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
+
+
+
